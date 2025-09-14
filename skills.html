@@ -5,76 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Skills | c4tz</title>
   <link rel="stylesheet" href="static/css/style.css" />
+  <style>
+    /* ====== Certifications grid (uniform sizes + attractive layout) ====== */
+    .certs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .cert-card {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: #0f1420;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .cert-card:focus-visible {
+      outline: 2px solid #67e8f9;
+      outline-offset: 3px;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    }
+    .cert-thumb {
+      aspect-ratio: 16 / 9;            /* <— tailles identiques */
+      overflow: hidden;
+    }
+    .cert-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;                /* recadrage propre et constant */
+      display: block;
+    }
+    .cert-caption {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-align: center;
+      color: #e6edf3;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* Optionnel : harmonise un peu la section “Compétences” sur petits écrans */
+    @media (max-width: 640px) {
+      .prose ul { padding-left: 1rem; }
+    }
+  </style>
 </head>
 <body>
   <div class="page">
     <aside class="sidebar">
       <a class="brand" href="about.html">
-<img class="avatar" alt="" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
+        <img class="avatar" alt="Avatar de c4tz" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
         <div><h1>c4tz</h1><p>Portfolio & writeups</p></div>
       </a>
-      <nav class="snav">
+
+      <nav class="snav" aria-label="Navigation latérale">
         <ul>
-          <li><a href="writeup.html"   alt=""> Write Up</a></li>
-          <li><a href="portfolio.html"  alt=""> Portfolio</a></li>
-          <li><a href="skills.html"   alt=""> Skills</a></li>
-          <li><a href="about.html"   alt=""> About</a></li>
+          <li><a href="writeup.html">Write Up</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="skills.html" aria-current="page">Skills</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
-  <div class="social">
-    <a href="https://tryhackme.com" target="_blank" rel="noopener">
-      <img src="static/image/thm.png" alt="TryHackMe (cat)">
-    </a>
-    <a href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener">
-      <img src="static/image/zindi.png" alt="Zindi (cat)">
-    </a>
-    <a href="https://app.hackthebox.com" target="_blank" rel="noopener">
-      <img src="static/image/htb.png
-  " alt="Hack The Box (cat)">
-    </a>
-    <a href="https://www.root-me.org/c4tz" target="_blank" rel="noopener">
-      <img src="static/image/rootme.png" alt="Root-Me (cat)">
-    </a>
-    <a href="https://github.com/c4tzzz" target="_blank" rel="noopener">
-      <img src="static/image/github.png " alt="GitHub (cat)">
-    </a>
-  </div>
+
+      <div class="social">
+        <a href="https://tryhackme.com" target="_blank" rel="noopener">
+          <img src="static/image/thm.png" alt="TryHackMe (cat)">
+        </a>
+        <a href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener">
+          <img src="static/image/zindi.png" alt="Zindi (cat)">
+        </a>
+        <a href="https://app.hackthebox.com" target="_blank" rel="noopener">
+          <img src="static/image/htb.png" alt="Hack The Box (cat)">
+        </a>
+        <a href="https://www.root-me.org/c4tz" target="_blank" rel="noopener">
+          <img src="static/image/rootme.png" alt="Root-Me (cat)">
+        </a>
+        <a href="https://github.com/c4tzzz" target="_blank" rel="noopener">
+          <img src="static/image/github.png" alt="GitHub (cat)">
+        </a>
+      </div>
     </aside>
 
     <div class="content">
       <div class="topbar">
-<img class="avatar" alt="" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
+        <img class="avatar" alt="Avatar de c4tz" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
         <strong>c4tz</strong>
       </div>
 
       <main class="main">
         <h2 class="page-title">Skills</h2>
-        
-<section class="prose">
-  <h2>Compétences</h2>
-  <ul>
-    <li>HTML/CSS </li>
-    <li>Compétences Blue Team (cdsa) : Surveillance SIEM (Elastic, Splunk), analyse forensic Windows/Linux, réponse aux incidents, threat intelligence (MITRE ATT&CK), durcissement systèmes, OSINT, investigation réseau (Wireshark, Zeek, Suricata,Snort). </li>
-    <li>Compétences Red Team  (cbbh) : faille (OWASP 10), reconnaissance (nmap, gobuster),</li>
-    <li>Compétences Network          : Réseaux : CCNA v2 – Configuration et dépannage routeurs/switches Cisco, VLAN, routage OSPF/EIGRP, ACL, NAT/PAT, Spanning Tree, surveillance réseau (Wireshark, SNMP), sécurité des ports et segmentation.</li>
-  </ul>
-</section>
-<section class="prose">
-  <h2>Certifications / Path complétés</h2>
-  <div class="certs">
-    <a href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
-      <img src="static/image/socanalyst.png" alt="SOC Analyst Path (HTB)">
-    </a>
-    <a href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
-      <img src="static/image/redteamia.png" alt="AI Red Teamer Path (HTB)">
-    </a>
-    <a href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
-      <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst (HTB)">
-    </a>
-  </div>
-</section>
 
+        <section class="prose">
+          <h2>Compétences</h2>
+          <ul>
+            <li>HTML/CSS</li>
+            <li>Compétences Blue Team (cdsa) : Surveillance SIEM (Elastic, Splunk), analyse forensic Windows/Linux, réponse aux incidents, threat intelligence (MITRE ATT&amp;CK), durcissement systèmes, OSINT, investigation réseau (Wireshark, Zeek, Suricata, Snort).</li>
+            <li>Compétences Red Team (cbbh) : failles (OWASP Top 10), reconnaissance (nmap, gobuster).</li>
+            <li>Compétences Network : CCNA v2 – Configuration et dépannage routeurs/switches Cisco, VLAN, routage OSPF/EIGRP, ACL, NAT/PAT, Spanning Tree, surveillance réseau (Wireshark, SNMP), sécurité des ports et segmentation.</li>
+          </ul>
+        </section>
 
+        <section class="prose">
+          <h2>Certifications / Path complétés</h2>
+          <div class="certs">
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">SOC Analyst (HTB Academy)</div>
+            </a>
+
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+            </a>
+
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+            </a>
+          </div>
+        </section>
       </main>
 
       <footer class="footer">© 2025 c4tz — respect cats</footer>
@@ -82,10 +143,10 @@
   </div>
 
   <nav class="mobile-nav" aria-label="Navigation mobile">
-    <a href="writeup.html"  alt=""><span>WriteUp</span></a>
-    <a href="portfolio.html"  alt=""><span>Portfolio</span></a>
-    <a href="skills.html"  alt=""><span>Skills</span></a>
-    <a href="about.html"  alt=""><span>About</span></a>
+    <a href="writeup.html"><span>WriteUp</span></a>
+    <a href="portfolio.html"><span>Portfolio</span></a>
+    <a href="skills.html" aria-current="page"><span>Skills</span></a>
+    <a href="about.html"><span>About</span></a>
   </nav>
 </body>
 </html>
