@@ -18,28 +18,22 @@
       filter: brightness(1) invert(0);
     }
 
-    /* ===== Layout : À propos (gauche) + Certifs (droite) ===== */
+    /* ===== Layout global de la page About ===== */
     .about-layout {
       display: flex;
       align-items: flex-start;
-      gap: 32px;              /* espace propre entre les deux colonnes */
+      gap: 32px;              /* espace agréable entre bloc rose et colonne certifs */
       margin-top: 12px;
     }
 
-    .about-intro {
+    .about-left {
       flex: 1;
-      min-width: 0;
+      min-width: 0;           /* laisse le texte prendre l’espace */
     }
 
     .about-right {
-      width: 280px;
+      width: 280px;           /* largeur fixe de la colonne certifs */
       flex-shrink: 0;
-    }
-
-    /* Enlève tout décalage vertical entre les deux titres */
-    .about-intro h2,
-    .about-right h2 {
-      margin-top: 0;
     }
 
     /* ===== Badges HTB - Grid ===== */
@@ -169,29 +163,40 @@
       <main class="main">
         <h2 class="page-title">About</h2>
 
-        <!-- ===== Ligne : À propos (gauche) + Certifs (droite) ===== -->
+        <!-- ===== Bloc principal : gauche + droite ===== -->
         <section class="about-layout">
 
-          <!-- Colonne gauche -->
-          <section class="prose about-intro">
-            <h2>À propos</h2>
-            <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
+          <!-- === Colonne gauche : À propos + Compétences + Badges === -->
+          <div class="about-left">
+            <section class="prose">
+              <h2>À propos</h2>
+              <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
 
-            <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
-            <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
+              <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
+              <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
 
-            <h3>Compétences</h3>
-            <ul>
-              <li>Web</li>
-              <li>Blue Team (CDSA)</li>
-              <li>Red Team (CBBH)</li>
-              <li>Network</li>
-              <li>Social Engineering</li>
-              <li>Artificial Intelligence</li>
-            </ul>
-          </section>
+              <h3>Compétences</h3>
+              <ul>
+                <li>Web</li>
+                <li>Blue Team (CDSA)</li>
+                <li>Red Team (CBBH)</li>
+                <li>Network</li>
+                <li>Social Engineering</li>
+                <li>Artificial Intelligence</li>
+              </ul>
+            </section>
 
-          <!-- Colonne droite -->
+            <!-- ⭐⭐ SECTION BADGES HTB ⭐⭐ -->
+            <section class="prose">
+              <h2>Badges Hack The Box Academy</h2>
+              <p>Voici l'ensemble de mes badges HackTheBox Academy :</p>
+
+              <div id="badgeContainer" class="badges-grid"></div>
+            </section>
+            <!-- ⭐⭐ FIN SECTION BADGES ⭐⭐ -->
+          </div>
+
+          <!-- === Colonne droite : Certifications / Paths complétés === -->
           <aside class="about-right">
             <section class="prose">
               <h2>Certifications / Paths complétés</h2>
@@ -229,15 +234,7 @@
           </aside>
 
         </section>
-        <!-- ===== Fin de la ligne haute ===== -->
-
-        <!-- ===== Badges en full-width sous les deux colonnes ===== -->
-        <section class="prose">
-          <h2>Badges Hack The Box Academy</h2>
-          <p>Voici l'ensemble de mes badges HackTheBox Academy :</p>
-
-          <div id="badgeContainer" class="badges-grid"></div>
-        </section>
+        <!-- ===== Fin bloc principal ===== -->
 
       </main>
 
