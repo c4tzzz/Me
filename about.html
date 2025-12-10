@@ -18,6 +18,37 @@
       filter: brightness(1) invert(0);
     }
 
+    /* ===== Layout haut de page : texte à gauche / certifs à droite ===== */
+    .about-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .about-top .prose-left {
+      flex: 1 1 auto;
+      max-width: 640px;
+    }
+
+    .about-top .prose-right {
+      flex: 0 0 300px;
+    }
+
+    /* Sur mobile : on repasse en colonne */
+    @media (max-width: 900px) {
+      .about-top {
+        flex-direction: column;
+      }
+      .about-top .prose-right {
+        flex: 1 1 auto;
+      }
+      .certs {
+        align-items: flex-start;
+      }
+    }
+
     /* ===== Badges HTB - Grid ===== */
     .badges-grid {
       display: grid;
@@ -53,12 +84,12 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      align-items: flex-end;              /* cartes collées à droite */
+      align-items: flex-end;
       margin-top: 10px;
     }
 
     .cert-card {
-      width: 280px;                       /* largeur fixe pour une belle colonne */
+      width: 280px;
       display: grid;
       grid-template-rows: 1fr auto;
       background: #0f1420;
@@ -137,60 +168,60 @@
       <main class="main">
         <h2 class="page-title">About</h2>
 
-        <!-- À propos -->
-        <section class="prose">
-          <h2>À propos</h2>
-          <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
+        <!-- Haut de page : colonne gauche / colonne droite -->
+        <section class="about-top">
+          <!-- Colonne gauche : À propos + Compétences -->
+          <div class="prose prose-left">
+            <h2>À propos</h2>
+            <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
 
-          <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
-          <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
-        </section>
+            <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
+            <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
 
-        <!-- Compétences (ancien Skills) -->
-        <section class="prose">
-          <h2>Compétences</h2>
-          <ul>
-            <li>Web</li>
-            <li>Blue Team (CDSA)</li>
-            <li>Red Team (CBBH)</li>
-            <li>Network</li>
-            <li>Social Engineering</li>
-            <li>Artificial Intelligence</li>
-          </ul>
-        </section>
+            <h2>Compétences</h2>
+            <ul>
+              <li>Web</li>
+              <li>Blue Team (CDSA)</li>
+              <li>Red Team (CBBH)</li>
+              <li>Network</li>
+              <li>Social Engineering</li>
+              <li>Artificial Intelligence</li>
+            </ul>
+          </div>
 
-        <!-- Certifications / Paths complétés (colonne à droite) -->
-        <section class="prose">
-          <h2>Certifications / Paths complétés</h2>
+          <!-- Colonne droite : Certifications / Paths -->
+          <div class="prose prose-right">
+            <h2>Certifications / Paths complétés</h2>
 
-          <div class="certs">
-            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
-              <div class="cert-thumb">
-                <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
-              </div>
-              <div class="cert-caption">SOC Analyst (HTB Academy)</div>
-            </a>
+            <div class="certs">
+              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
+                <div class="cert-thumb">
+                  <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
+                </div>
+                <div class="cert-caption">SOC Analyst (HTB Academy)</div>
+              </a>
 
-            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
-              <div class="cert-thumb">
-                <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
-              </div>
-              <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
-            </a>
+              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
+                <div class="cert-thumb">
+                  <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
+                </div>
+                <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+              </a>
 
-            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
-              <div class="cert-thumb">
-                <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
-              </div>
-              <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
-            </a>
+              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
+                <div class="cert-thumb">
+                  <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
+                </div>
+                <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+              </a>
 
-            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" target="_blank" rel="noopener">
-              <div class="cert-thumb">
-                <img src="static/image/cwes.png" alt="Certified Web Exploitation Specialist — Hack The Box" loading="lazy" decoding="async">
-              </div>
-              <div class="cert-caption">Certified Web Exploitation Specialist (HTB Academy)</div>
-            </a>
+              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" target="_blank" rel="noopener">
+                <div class="cert-thumb">
+                  <img src="static/image/cwes.png" alt="Certified Web Exploitation Specialist — Hack The Box" loading="lazy" decoding="async">
+                </div>
+                <div class="cert-caption">Certified Web Exploitation Specialist (HTB Academy)</div>
+              </a>
+            </div>
           </div>
         </section>
 
