@@ -18,25 +18,25 @@
       filter: brightness(1) invert(0);
     }
 
-    /* ===== Layout haut de page : texte à gauche / certifs à droite ===== */
+    /* ===== Layout haut de page : texte à gauche / certifs juste à côté ===== */
     .about-top {
       display: flex;
       align-items: flex-start;
-      justify-content: space-between;
+      /* on enlève space-between pour éviter le gros trou */
       gap: 40px;
       margin-bottom: 30px;
     }
 
     .about-top .prose-left {
-      flex: 1 1 auto;
-      max-width: 640px;
+      flex: 1 1 0;
+      max-width: 720px;
     }
 
     .about-top .prose-right {
       flex: 0 0 300px;
     }
 
-    /* Sur mobile : on repasse en colonne */
+    /* Sur mobile : colonne */
     @media (max-width: 900px) {
       .about-top {
         flex-direction: column;
@@ -79,12 +79,12 @@
       border-radius: 8px;
     }
 
-    /* ====== Certifications : colonne à droite ====== */
+    /* ====== Certifications : colonne ====== */
     .certs {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      align-items: flex-end;
+      align-items: flex-start;
       margin-top: 10px;
     }
 
@@ -168,7 +168,7 @@
       <main class="main">
         <h2 class="page-title">About</h2>
 
-        <!-- Haut de page : colonne gauche / colonne droite -->
+        <!-- Haut de page : colonne gauche / colonne droite rapprochées -->
         <section class="about-top">
           <!-- Colonne gauche : À propos + Compétences -->
           <div class="prose prose-left">
