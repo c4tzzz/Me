@@ -4,78 +4,140 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Portfolio | c4tz</title>
-  <link rel="stylesheet" href="portfolio/static/css/style.css" />
+
+  <!-- IMPORTANT : même CSS que skills.html -->
+  <link rel="stylesheet" href="static/css/style.css" />
+
+  <style>
+    /* ====== Cards Portfolio (mêmes dimensions que certifs) ====== */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: #0f1420;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    }
+
+    .project-thumb {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-caption {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-align: center;
+      color: #e6edf3;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+  </style>
 </head>
+
 <body>
   <div class="page">
     <aside class="sidebar">
-      <a class="brand" href="portfolio/about.html">
-        <img class="avatar" alt="" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
+      <a class="brand" href="about.html">
+        <img class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg" alt="">
         <div><h1>c4tz</h1><p>Portfolio & writeups</p></div>
       </a>
 
       <nav class="snav">
         <ul>
-          <li><a href="portfolio/writeup.html" alt=""> Write Up</a></li>
-          <li><a href="portfolio/portfolio.html" alt=""> Portfolio</a></li>
-          <li><a href="portfolio/skills.html" alt=""> Skills</a></li>
-          <li><a href="portfolio/about.html" alt=""> About</a></li>
+          <li><a href="writeup.html">Write Up</a></li>
+          <li><a href="portfolio.html" aria-current="page">Portfolio</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
 
       <div class="social">
-        <a href="https://tryhackme.com" target="_blank" rel="noopener">
-          <img src="portfolio/static/image/thm.png" alt="TryHackMe (cat)">
+        <a href="https://tryhackme.com" target="_blank">
+          <img src="static/image/thm.png">
         </a>
-
-        <a href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener">
-          <img src="portfolio/static/image/zindi.png" alt="Zindi (cat)">
+        <a href="https://zindi.africa/users/c4tz" target="_blank">
+          <img src="static/image/zindi.png">
         </a>
-
-        <a href="https://app.hackthebox.com" target="_blank" rel="noopener">
-          <img src="portfolio/static/image/htb.png" alt="Hack The Box (cat)">
+        <a href="https://app.hackthebox.com" target="_blank">
+          <img src="static/image/htb.png">
         </a>
-
-        <a href="https://www.root-me.org/c4tz" target="_blank" rel="noopener">
-          <img src="portfolio/static/image/rootme.png" alt="Root-Me (cat)">
+        <a href="https://www.root-me.org/c4tz" target="_blank">
+          <img src="static/image/rootme.png">
         </a>
-
-        <a href="https://github.com/c4tzzz" target="_blank" rel="noopener">
-          <img src="portfolio/static/image/github.png" alt="GitHub (cat)">
+        <a href="https://github.com/c4tzzz" target="_blank">
+          <img src="static/image/github.png">
         </a>
       </div>
     </aside>
 
     <div class="content">
       <div class="topbar">
-        <img class="avatar" alt="" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg">
+        <img class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg" alt="">
         <strong>c4tz</strong>
       </div>
 
       <main class="main">
         <h2 class="page-title">Portfolio</h2>
 
-        <section class="list">
-          <a class="card" href="portfolio/project-hackrf.html">
-            <h2>hack rf ble/rf/fm</h2><p>project beginner</p>
+        <section class="prose">
+          <h2>Mes projets</h2>
+          <p>Une sélection de projets personnels en IA, radio, cybersécurité et networking.</p>
+        </section>
+
+        <!-- ====== Portfolio grid ====== -->
+        <section class="projects">
+
+          <a class="project-card" href="project-hackrf.html">
+            <div class="project-thumb">
+              <img src="static/image/hackrf.png" alt="HackRF project">
+            </div>
+            <div class="project-caption">HackRF – RF/BLE/FM Research</div>
           </a>
 
-          <a class="card" href="portfolio/aigoodworks.html">
-            <h2>GoodWords</h2><p>Ia beginn</p>
+          <a class="project-card" href="aigoodworks.html">
+            <div class="project-thumb">
+              <img src="static/image/goodwords.png" alt="AI GoodWords project">
+            </div>
+            <div class="project-caption">GoodWords – IA Adversarial Linguistics</div>
           </a>
+
         </section>
 
       </main>
 
-      <footer class="footer">© 2025 c4tz — cats</footer>
+      <footer class="footer">
+        © 2025 c4tz — respect cats
+      </footer>
     </div>
   </div>
 
-  <nav class="mobile-nav" aria-label="Navigation mobile">
-    <a href="portfolio/writeup.html" alt=""><span>WriteUp</span></a>
-    <a href="portfolio/portfolio.html" alt=""><span>Portfolio</span></a>
-    <a href="portfolio/skills.html" alt=""><span>Skills</span></a>
-    <a href="portfolio/about.html" alt=""><span>About</span></a>
+  <nav class="mobile-nav">
+    <a href="writeup.html"><span>WriteUp</span></a>
+    <a href="portfolio.html" aria-current="page"><span>Portfolio</span></a>
+    <a href="skills.html"><span>Skills</span></a>
+    <a href="about.html"><span>About</span></a>
   </nav>
 </body>
 </html>
