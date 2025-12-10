@@ -18,35 +18,22 @@
       filter: brightness(1) invert(0);
     }
 
-    /* ===== Layout haut de page : texte à gauche / certifs juste à côté ===== */
-    .about-top {
+    /* ===== Layout global de la page About ===== */
+    .about-layout {
       display: flex;
       align-items: flex-start;
-      /* on enlève space-between pour éviter le gros trou */
-      gap: 40px;
-      margin-bottom: 30px;
+      gap: 32px;              /* espace agréable entre bloc rose et colonne certifs */
+      margin-top: 12px;
     }
 
-    .about-top .prose-left {
-      flex: 1 1 0;
-      max-width: 720px;
+    .about-left {
+      flex: 1;
+      min-width: 0;           /* laisse le texte prendre l’espace */
     }
 
-    .about-top .prose-right {
-      flex: 0 0 300px;
-    }
-
-    /* Sur mobile : colonne */
-    @media (max-width: 900px) {
-      .about-top {
-        flex-direction: column;
-      }
-      .about-top .prose-right {
-        flex: 1 1 auto;
-      }
-      .certs {
-        align-items: flex-start;
-      }
+    .about-right {
+      width: 280px;           /* largeur fixe de la colonne certifs */
+      flex-shrink: 0;
     }
 
     /* ===== Badges HTB - Grid ===== */
@@ -79,17 +66,15 @@
       border-radius: 8px;
     }
 
-    /* ====== Certifications : colonne ====== */
+    /* ===== Certifications : colonne droite ===== */
     .certs {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      align-items: flex-start;
-      margin-top: 10px;
+      margin-top: 4px;
     }
 
     .cert-card {
-      width: 280px;
       display: grid;
       grid-template-rows: 1fr auto;
       background: #0f1420;
@@ -130,6 +115,16 @@
       color: #e6edf3;
       border-top: 1px solid rgba(255,255,255,.06);
     }
+
+    /* Stack en colonne sur mobile */
+    @media (max-width: 900px) {
+      .about-layout {
+        flex-direction: column;
+      }
+      .about-right {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -168,71 +163,78 @@
       <main class="main">
         <h2 class="page-title">About</h2>
 
-        <!-- Haut de page : colonne gauche / colonne droite rapprochées -->
-        <section class="about-top">
-          <!-- Colonne gauche : À propos + Compétences -->
-          <div class="prose prose-left">
-            <h2>À propos</h2>
-            <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
+        <!-- ===== Bloc principal : gauche + droite ===== -->
+        <section class="about-layout">
 
-            <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
-            <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
+          <!-- === Colonne gauche : À propos + Compétences + Badges === -->
+          <div class="about-left">
+            <section class="prose">
+              <h2>À propos</h2>
+              <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
 
-            <h2>Compétences</h2>
-            <ul>
-              <li>Web</li>
-              <li>Blue Team (CDSA)</li>
-              <li>Red Team (CBBH)</li>
-              <li>Network</li>
-              <li>Social Engineering</li>
-              <li>Artificial Intelligence</li>
-            </ul>
+              <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
+              <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
+
+              <h3>Compétences</h3>
+              <ul>
+                <li>Web</li>
+                <li>Blue Team (CDSA)</li>
+                <li>Red Team (CBBH)</li>
+                <li>Network</li>
+                <li>Social Engineering</li>
+                <li>Artificial Intelligence</li>
+              </ul>
+            </section>
+
+            <!-- ⭐⭐ SECTION BADGES HTB ⭐⭐ -->
+            <section class="prose">
+              <h2>Badges Hack The Box Academy</h2>
+              <p>Voici l'ensemble de mes badges HackTheBox Academy :</p>
+
+              <div id="badgeContainer" class="badges-grid"></div>
+            </section>
+            <!-- ⭐⭐ FIN SECTION BADGES ⭐⭐ -->
           </div>
 
-          <!-- Colonne droite : Certifications / Paths -->
-          <div class="prose prose-right">
-            <h2>Certifications / Paths complétés</h2>
+          <!-- === Colonne droite : Certifications / Paths complétés === -->
+          <aside class="about-right">
+            <section class="prose">
+              <h2>Certifications / Paths complétés</h2>
 
-            <div class="certs">
-              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
-                <div class="cert-thumb">
-                  <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
-                </div>
-                <div class="cert-caption">SOC Analyst (HTB Academy)</div>
-              </a>
+              <div class="certs">
+                <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
+                  <div class="cert-thumb">
+                    <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
+                  </div>
+                  <div class="cert-caption">SOC Analyst (HTB Academy)</div>
+                </a>
 
-              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
-                <div class="cert-thumb">
-                  <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
-                </div>
-                <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
-              </a>
+                <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
+                  <div class="cert-thumb">
+                    <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
+                  </div>
+                  <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+                </a>
 
-              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
-                <div class="cert-thumb">
-                  <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
-                </div>
-                <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
-              </a>
+                <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
+                  <div class="cert-thumb">
+                    <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
+                  </div>
+                  <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+                </a>
 
-              <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" target="_blank" rel="noopener">
-                <div class="cert-thumb">
-                  <img src="static/image/cwes.png" alt="Certified Web Exploitation Specialist — Hack The Box" loading="lazy" decoding="async">
-                </div>
-                <div class="cert-caption">Certified Web Exploitation Specialist (HTB Academy)</div>
-              </a>
-            </div>
-          </div>
+                <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" target="_blank" rel="noopener">
+                  <div class="cert-thumb">
+                    <img src="static/image/cwes.png" alt="Certified Web Exploitation Specialist — Hack The Box" loading="lazy" decoding="async">
+                  </div>
+                  <div class="cert-caption">Certified Web Exploitation Specialist (HTB Academy)</div>
+                </a>
+              </div>
+            </section>
+          </aside>
+
         </section>
-
-        <!-- ⭐⭐ SECTION BADGES HTB ⭐⭐ -->
-        <section class="prose">
-          <h2>Badges Hack The Box Academy</h2>
-          <p>Voici l'ensemble de mes badges HackTheBox Academy :</p>
-
-          <div id="badgeContainer" class="badges-grid"></div>
-        </section>
-        <!-- ⭐⭐ FIN SECTION BADGES ⭐⭐ -->
+        <!-- ===== Fin bloc principal ===== -->
 
       </main>
 
