@@ -5,59 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Portfolio | c4tz</title>
 
-  <!-- IMPORTANT : même CSS que skills.html -->
+  <!-- CSS global du site -->
   <link rel="stylesheet" href="static/css/style.css" />
 
   <style>
-    /* ====== Cards Portfolio (mêmes dimensions que certifs) ====== */
+    /* ===== Portfolio grid ===== */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      align-items: stretch;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+      padding: 10px 0;
     }
 
+    /* ===== Card ===== */
     .project-card {
-      display: grid;
-      grid-template-rows: 1fr auto;
-      background: #0f1420;
-      border-radius: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(145deg, #0d1117, #0b0e14);
+      border-radius: 18px;
       overflow: hidden;
       text-decoration: none;
-      box-shadow: 0 6px 18px rgba(0,0,0,.35);
-      transition: transform .2s ease, box-shadow .2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      transition: transform .25s ease, box-shadow .25s ease, border .25s ease;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+      border: 1px solid rgba(102, 243, 255, 0.22);
     }
 
+    /* ===== Thumbnail ===== */
     .project-thumb {
+      width: 100%;
       aspect-ratio: 16/9;
       overflow: hidden;
+      background: #161b22;
     }
 
     .project-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      transition: transform .3s ease, opacity .3s ease;
     }
 
-    .project-caption {
-      padding: 10px 12px;
-      font-weight: 600;
-      font-size: .95rem;
-      text-align: center;
-      color: #e6edf3;
-      border-top: 1px solid rgba(255,255,255,.06);
+    .project-card:hover .project-thumb img {
+      transform: scale(1.04);
+      opacity: 0.92;
     }
+
+    /* ===== Caption ===== */
+    .project-caption {
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #e6edf3;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(13, 17, 23, 0.65);
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.3px;
+    }
+
   </style>
 </head>
 
 <body>
   <div class="page">
+
+    <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar">
       <a class="brand" href="about.html">
         <img class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg" alt="">
@@ -92,6 +111,7 @@
       </div>
     </aside>
 
+    <!-- ===== CONTENT ===== -->
     <div class="content">
       <div class="topbar">
         <img class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg" alt="">
@@ -106,7 +126,7 @@
           <p>Une sélection de projets personnels en IA, radio, cybersécurité et networking.</p>
         </section>
 
-        <!-- ====== Portfolio grid ====== -->
+        <!-- ===== PORTFOLIO CARDS ===== -->
         <section class="projects">
 
           <a class="project-card" href="project-hackrf.html">
@@ -133,11 +153,13 @@
     </div>
   </div>
 
+  <!-- ===== MOBILE NAV ===== -->
   <nav class="mobile-nav">
     <a href="writeup.html"><span>WriteUp</span></a>
     <a href="portfolio.html" aria-current="page"><span>Portfolio</span></a>
     <a href="skills.html"><span>Skills</span></a>
     <a href="about.html"><span>About</span></a>
   </nav>
+
 </body>
 </html>
