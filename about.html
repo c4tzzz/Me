@@ -47,6 +47,58 @@
       object-fit: contain;
       border-radius: 8px;
     }
+
+    /* ====== Certifications : colonne à droite ====== */
+    .certs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-end;              /* cartes collées à droite */
+      margin-top: 10px;
+    }
+
+    .cert-card {
+      width: 280px;                       /* largeur fixe pour une belle colonne */
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: #0f1420;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .cert-card:focus-visible {
+      outline: 2px solid #67e8f9;
+      outline-offset: 3px;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    }
+
+    .cert-thumb {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .cert-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cert-caption {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-align: center;
+      color: #e6edf3;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
   </style>
 </head>
 
@@ -85,12 +137,61 @@
       <main class="main">
         <h2 class="page-title">About</h2>
 
+        <!-- À propos -->
         <section class="prose">
           <h2>À propos</h2>
           <p>Je suis <strong>c4tz</strong>, étudiant en réseaux, cybersécurité et IA appliquée.</p>
 
           <p><strong>Qualités</strong> : autonomie, persévérance, curiosité, logique.</p>
           <p><strong>Passions</strong> : cybersécurité offensive, blue team, IA, réseaux telecom, OSINT, radio (RF).</p>
+        </section>
+
+        <!-- Compétences (ancien Skills) -->
+        <section class="prose">
+          <h2>Compétences</h2>
+          <ul>
+            <li>Web</li>
+            <li>Blue Team (CDSA)</li>
+            <li>Red Team (CBBH)</li>
+            <li>Network</li>
+            <li>Social Engineering</li>
+            <li>Artificial Intelligence</li>
+          </ul>
+        </section>
+
+        <!-- Certifications / Paths complétés (colonne à droite) -->
+        <section class="prose">
+          <h2>Certifications / Paths complétés</h2>
+
+          <div class="certs">
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/socanalyst.png" alt="SOC Analyst Path — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">SOC Analyst (HTB Academy)</div>
+            </a>
+
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/redteamia.png" alt="AI Red Teamer Path — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+            </a>
+
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/juniorcybersec.png" alt="Junior Cybersecurity Analyst — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+            </a>
+
+            <a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" target="_blank" rel="noopener">
+              <div class="cert-thumb">
+                <img src="static/image/cwes.png" alt="Certified Web Exploitation Specialist — Hack The Box" loading="lazy" decoding="async">
+              </div>
+              <div class="cert-caption">Certified Web Exploitation Specialist (HTB Academy)</div>
+            </a>
+          </div>
         </section>
 
         <!-- ⭐⭐ SECTION BADGES HTB ⭐⭐ -->
