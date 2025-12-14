@@ -7,6 +7,103 @@
   <link rel="stylesheet" href="static/css/style.css" />
 
   <style>
+
+
+    /* ===== Présentation (About) — clean / pro ===== */
+.about-hero{
+  background: rgba(17,19,23,.72);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  box-shadow: none; /* ✅ plus propre */
+}
+
+.about-hero h2{
+  margin: 0 0 6px;
+  font-size: 20px;
+  letter-spacing: .2px;
+}
+
+.about-lead{
+  margin: 0;
+  color: #cfd7e1;
+  font-size: 14.5px;
+  line-height: 1.65;
+  max-width: 78ch; /* ✅ confort de lecture */
+}
+
+.about-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  color: #e6edf3;
+  font-size: 12.5px;
+  line-height: 1;
+}
+
+/* Grille des “piliers” plus alignée */
+.skills-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.skill-card{
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: none; /* ✅ */
+}
+
+.skill-card h4{
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color:#eaf1fb;
+  letter-spacing: .15px;
+}
+
+/* ✅ liste plus “pro” (moins de gros bullets) */
+.skill-card ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color:#c8d0da;
+  font-size: 13.5px;
+}
+
+.skill-card li{
+  margin: 7px 0;
+  padding-left: 14px;
+  position: relative;
+}
+
+.skill-card li::before{
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(125,211,252,.85); /* ton accent */
+}
+
+/* Mobile */
+@media (max-width: 900px){
+  .skills-grid{ grid-template-columns: 1fr; }
+  .about-lead{ max-width: 100%; }
+}
+
     /* Social icons (override) */
     .social img{
       width:32px;height:32px;object-fit:contain;
