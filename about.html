@@ -125,6 +125,35 @@
         width: 100%;
       }
     }
+    /* ✅ limite la largeur du contenu pour éviter le vide sur grands écrans */
+.main{
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ✅ layout stable : colonne contenu + colonne certifs, sans pousser à l’extrême droite */
+.about-layout{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+  margin-top: 12px;
+}
+
+/* ✅ important pour éviter les débordements en grid */
+.about-left{ min-width: 0; }
+.about-right{ width: auto; }
+
+/* ✅ sur desktop : on enlève le max-width qui crée le “trou”
+   (si tu veux garder le confort de lecture pour le texte, je te mets une option juste après) */
+.about-left .prose{ max-width: 100%; }
+
+/* mobile */
+@media (max-width: 900px){
+  .main{ max-width: none; }
+  .about-layout{ grid-template-columns: 1fr; }
+}
+
   </style>
 </head>
 
