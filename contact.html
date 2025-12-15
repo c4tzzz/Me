@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>Contacts | c4tz</title>
+  <link href="static/css/style.css" rel="stylesheet"/>
+
+  <!-- Mini CSS juste pour aligner les liens/actions, sans changer ton thème -->
+  <style>
+    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+    .linklike{
+      background:none;border:0;padding:0;
+      color:inherit;text-decoration:underline;cursor:pointer;
+      font:inherit;
+    }
+    .meta{opacity:.85}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
+
+<body>
+<div class="page">
+  <aside class="sidebar">
+    <a class="brand" href="about.html">
+      <img alt="" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+      <div><h1>c4tz</h1><p>Portfolio &amp; writeups</p></div>
+    </a>
+
+    <nav class="snav">
+      <ul>
+        <li><a alt="" href="writeup.html"> Write Up</a></li>
+        <li><a alt="" href="portfolio.html"> Portfolio</a></li>
+        <li><a alt="" href="contact.html"> Contacts</a></li>
+        <li><a alt="" href="about.html"> About</a></li>
+      </ul>
+    </nav>
+
+    <div class="social">
+      <a href="https://tryhackme.com" target="_blank" rel="noopener"><img src="static/image/thm.png" alt="TryHackMe"></a>
+      <a href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener"><img src="static/image/zindi.png" alt="Zindi"></a>
+      <a href="https://app.hackthebox.com" target="_blank" rel="noopener"><img src="static/image/htb.png" alt="Hack The Box"></a>
+      <a href="https://www.root-me.org/c4tz" target="_blank" rel="noopener"><img src="static/image/rootme.png" alt="Root-Me"></a>
+      <a href="https://github.com/c4tzzz" target="_blank" rel="noopener"><img src="static/image/github.png" alt="GitHub"></a>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <img alt="" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+      <strong>c4tz</strong>
+    </div>
+
+    <main class="main">
+      <h2 class="page-title">Contacts</h2>
+
+      <!-- Contact (même style que les cards en bas) -->
+      <section class="list">
+        <div class="card">
+          <h2>Email</h2>
+          <p class="meta">Pour questions, feedback, opportunités.</p>
+          <p><strong>Adresse :</strong> <code id="emailValue">contact@c4tz.fr</code></p>
+          <div class="actions">
+            <a href="mailto:contact@c4tz.fr?subject=Contact%20Portfolio%20c4tz">Envoyer un email</a>
+            <button class="linklike" type="button" id="copyEmailBtn">Copier l’adresse</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Discord</h2>
+          <p class="meta">Le plus rapide pour discuter / questions courtes.</p>
+          <p><strong>Pseudo :</strong> <code>TON_DISCORD</code></p>
+          <!-- Optionnel: ajoute un lien d'invite si tu en as un
+          <div class="actions">
+            <a href="https://discord.gg/TON_INVITE" target="_blank" rel="noopener">Serveur / invite</a>
+          </div>
+          -->
+        </div>
+      </section>
+
+      <!-- Liens rapides -->
+      <section class="list">
+        <a class="card" href="https://github.com/c4tzzz" target="_blank" rel="noopener">
+          <h2>GitHub</h2><p>Projets, scripts, notes, portfolio.</p>
+        </a>
+        <a class="card" href="https://app.hackthebox.com" target="_blank" rel="noopener">
+          <h2>Hack The Box</h2><p>Parcours, labs, achievements.</p>
+        </a>
+        <a class="card" href="https://www.root-me.org/c4tz" target="_blank" rel="noopener">
+          <h2>Root-Me</h2><p>Profil &amp; challenges.</p>
+        </a>
+        <a class="card" href="https://tryhackme.com" target="_blank" rel="noopener">
+          <h2>TryHackMe</h2><p>Profil &amp; rooms.</p>
+        </a>
+        <a class="card" href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener">
+          <h2>Zindi</h2><p>Compétitions data / IA.</p>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">© 2025 c4tz — respect cats</footer>
+  </div>
+</div>
+
+<nav aria-label="Navigation mobile" class="mobile-nav">
+  <a alt="" href="writeup.html"><span>WriteUp</span></a>
+  <a alt="" href="portfolio.html"><span>Portfolio</span></a>
+  <a alt="" href="contact.html"><span>Contacts</span></a>
+  <a alt="" href="about.html"><span>About</span></a>
+</nav>
+
+<script>
+  // Copier l'email (propre, sans bouton moche)
+  const btn = document.getElementById("copyEmailBtn");
+  const email = document.getElementById("emailValue").textContent.trim();
+
+  btn?.addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(email);
+      btn.textContent = "Copié";
+      setTimeout(() => btn.textContent = "Copier l’adresse", 1200);
+    }catch(e){
+      // fallback simple
+      prompt("Copie l'adresse :", email);
+    }
+  });
+</script>
+</body>
+</html>
