@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>About | c4tz</title>
+<link href="../static/css/style.css" rel="stylesheet"/>
+<style>
+    /* ===== Social icons (override) ===== */
+    .social img{
+      width:32px;height:32px;object-fit:contain;
+      filter:brightness(0) invert(1);
+      transition:filter .2s;
+    }
+    .social img:hover{ filter:brightness(1) invert(0); }
+
+    /* ✅ limite la largeur du contenu (évite le grand vide sur écrans larges) */
+    .main{
+      max-width:1320px;
+      margin:0 auto;
+    }
+
+    /* ✅ layout About : colonne contenu + colonne certifs */
+    .about-layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 320px;
+      gap:24px;
+      align-items:start;
+      margin-top:12px;
+    }
+    .about-left{ min-width:0; }
+    .about-right{ width:auto; }
+    .about-left .prose{ max-width:100%; } /* évite le “trou” */
+
+    /* ===== Présentation (About) — clean / pro ===== */
+    .about-hero{
+      background: rgba(17,19,23,.72);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: none;
+    }
+
+    .about-hero h2{
+      margin: 0 0 6px;
+      font-size: 20px;
+      letter-spacing: .2px;
+    }
+
+    .about-lead{
+      margin: 0;
+      color: #cfd7e1;
+      font-size: 14.5px;
+      line-height: 1.65;
+      max-width: 78ch;
+    }
+
+    .about-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: #e6edf3;
+      font-size: 12.5px;
+      line-height: 1;
+    }
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .skill-card{
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: none;
+    }
+
+    .skill-card h4{
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color:#eaf1fb;
+      letter-spacing: .15px;
+    }
+
+    .skill-card ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color:#c8d0da;
+      font-size: 13.5px;
+    }
+
+    .skill-card li{
+      margin: 7px 0;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .skill-card li::before{
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: rgba(125,211,252,.85);
+    }
+
+    /* ===== Badges HTB - Grid ===== */
+    .badges-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+      gap:15px;
+      margin-top:20px;
+    }
+    .badge-item{
+      background:#0d1117;
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:12px;
+      padding:10px;
+      text-align:center;
+      transition:.25s;
+    }
+    .badge-item:hover{
+      border-color:#00eaff;
+      box-shadow:0 0 12px rgba(0,255,255,.4);
+      transform:translateY(-4px);
+    }
+    .badge-item img{
+      width:100%;
+      height:auto;
+      object-fit:contain;
+      border-radius:8px;
+    }
+
+    /* ===== Certifications : colonne droite ===== */
+    .certs{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      margin-top:4px;
+    }
+    .cert-card{
+      display:grid;
+      grid-template-rows:1fr auto;
+      background:#0f1420;
+      border-radius:12px;
+      overflow:hidden;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .cert-card:focus-visible{
+      outline:2px solid #67e8f9;
+      outline-offset:3px;
+    }
+    .cert-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 28px rgba(0,0,0,.45);
+    }
+    .cert-thumb{ aspect-ratio:16/9; overflow:hidden; }
+    .cert-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .cert-caption{
+      padding:10px 12px;
+      font-weight:600;
+      font-size:.95rem;
+      text-align:center;
+      color:#e6edf3;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    /* Mobile */
+    @media (max-width: 900px){
+      .main{ max-width:none; }
+      .about-layout{ grid-template-columns:1fr; }
+      .about-right{ width:100%; }
+      .skills-grid{ grid-template-columns:1fr; }
+      .about-lead{ max-width:100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+<aside class="sidebar">
+<a class="brand" href="../about.html">
+<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<div><h1>c4tz</h1><p>Portfolio &amp; writeups</p></div>
+</a>
+<nav class="snav">
+<ul>
+<li><a href="../writeup.html">Write Up</a></li>
+<li><a href="../portfolio.html">Portfolio</a></li>
+<li><a href="../skills.html">Skills</a></li>
+<li><a aria-current="page" class="active" href="../about.html">About</a></li>
+</ul>
+</nav>
+<div class="social">
+<a href="https://tryhackme.com" rel="noopener" target="_blank"><img alt="TryHackMe" src="../static/image/thm.png"/></a>
+<a href="https://zindi.africa/users/c4tz" rel="noopener" target="_blank"><img alt="Zindi" src="../static/image/zindi.png"/></a>
+<a href="https://app.hackthebox.com" rel="noopener" target="_blank"><img alt="Hack The Box" src="../static/image/htb.png"/></a>
+<a href="https://www.root-me.org/c4tz" rel="noopener" target="_blank"><img alt="Root-Me" src="../static/image/rootme.png"/></a>
+<a href="https://github.com/c4tzzz" rel="noopener" target="_blank"><img alt="GitHub" src="../static/image/github.png"/></a>
+</div>
+</aside>
+<div class="content">
+<div class="topbar">
+<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<strong>c4tz</strong>
+</div>
+<main class="main">
+<h2 class="page-title">About</h2>
+<section class="about-layout">
+<!-- Colonne gauche -->
+<div class="about-left">
+<!-- Présentation -->
+<section class="prose about-hero">
+<h2>À propos</h2>
+<p class="about-lead">
+<strong>c4tz</strong> — Réseaux, Cybersécurité &amp; IA. Labs et write-ups orientés
+                <strong>détection</strong>, <strong>web/appsec</strong>, <strong>AI security</strong>,
+                <strong>OSINT</strong> et <strong>social engineering</strong>.
+              </p>
+<div class="about-tags">
+<span class="tag">SOC / Blue Team</span>
+<span class="tag">Web &amp; AppSec</span>
+<span class="tag">AI Security</span>
+<span class="tag">OSINT</span>
+<span class="tag">Social Engineering</span>
+<span class="tag">Réseaux</span>
+<span class="tag">RF / SDR</span>
+</div>
+<div class="skills-grid">
+<div class="skill-card">
+<h4>Blue Team</h4>
+<ul>
+<li>Logs, triage, investigation</li>
+<li>Détection, IOC, playbooks</li>
+<li>Reporting clair</li>
+</ul>
+</div>
+<div class="skill-card">
+<h4>Offensive / AppSec</h4>
+<ul>
+<li>Recon, tests web</li>
+<li>Validation, exploitation en lab</li>
+<li>Recommandations correctives</li>
+</ul>
+</div>
+<div class="skill-card">
+<h4>IA • OSINT • Psycho</h4>
+<ul>
+<li>Risques LLM, prompt injection</li>
+<li>Collecte, pivoting, vérification</li>
+<li>Biais, persuasion, OPSEC</li>
+</ul>
+</div>
+<div class="skill-card">
+<h4>Réseaux &amp; RF</h4>
+<ul>
+<li>Architecture, segmentation</li>
+<li>MPLS/BGP/VRF, VPN</li>
+<li>RF/SDR : analyse &amp; labs</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Badges -->
+<section class="prose">
+<h2>Badges Hack The Box Academy</h2>
+<p>Voici l'ensemble de mes badges HackTheBox Academy :</p>
+<div class="badges-grid" id="badgeContainer"></div>
+</section>
+</div>
+<!-- Colonne droite -->
+<aside class="about-right">
+<section class="prose">
+<h2>Certifications / Paths complétés</h2>
+<div class="certs">
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="SOC Analyst Path — Hack The Box" decoding="async" loading="lazy" src="../static/image/socanalyst.png"/>
+</div>
+<div class="cert-caption">SOC Analyst (HTB Academy)</div>
+</a>
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="AI Red Teamer Path — Hack The Box" decoding="async" loading="lazy" src="../static/image/redteamia.png"/>
+</div>
+<div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+</a>
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="Junior Cybersecurity Analyst — Hack The Box" decoding="async" loading="lazy" src="../static/image/juniorcybersec.png"/>
+</div>
+<div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+</a>
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/17" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="Web Exploitation Specialist — Hack The Box" decoding="async" loading="lazy" src="../static/image/cwes.png"/>
+</div>
+<div class="cert-caption">Web Exploitation Specialist (HTB Academy)</div>
+</a>
+</div>
+</section>
+</aside>
+</section>
+</main>
+<footer class="footer">© 2025 c4tz — cats</footer>
+</div>
+</div>
+<nav class="mobile-nav">
+<a href="../writeup.html"><span>WriteUp</span></a>
+<a href="../portfolio.html"><span>Portfolio</span></a>
+<a href="../skills.html"><span>Skills</span></a>
+<a aria-current="page" class="active" href="../about.html"><span>About</span></a>
+</nav>
+<script>
+    const badges = [
+      { page: "https://academy.hackthebox.com/achievement/badge/88fa7d21-91b7-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/hacking-in-the-wild.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/b43ccd4e-7bae-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/our-favorite-seabird.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/aef36460-8c1e-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/the-eye-that-sees-all.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/d5a2a21b-8848-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/do-things-the-traditional-way.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/eeab8345-a740-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/every-road-leads-back-to-root.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/f391f3c4-63cb-11f0-bcfd-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/drop-your-weapon.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/4d0216ee-79ed-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/everything-is-connected.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/7c139229-1b8d-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/your-request-is-my-demand.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/4dc18fe5-91b0-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/combine-the-modules.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/4b280ff3-c880-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/playing-with-the-mess.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/d43834d8-884f-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/crawl-walk-run.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/34dcf349-6302-11f0-bcfd-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/fuzzing-is-power.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/13cc148d-9c70-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/crude-but-effective.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/015e5c86-927a-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/join-the-adventure.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/4d830891-1c5c-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/your-white-belt-training-begins.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/161da299-1c40-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/developer.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/08df35d0-9cab-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/just-a-small-crack-and-you-re-in.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/60beaeb7-ebc1-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/lurk-in-the-packets.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/2b382599-1c6a-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/snake-charmer.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/1754ddfa-63bf-11f0-bcfd-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/included-in-every-report.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/77d705b2-60ee-11f0-bcfd-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/dive-into-requests.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/e8a63bb5-8e9f-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/you-need-to-trace-before-you-can-hung.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/8574ee61-c721-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/attack-from-the-outside.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/50cc211f-a21f-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/arachnoid.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/c1f699fa-98cd-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/prepare-your-payload-and-up-you-go.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/5e1abab4-6228-11f0-bcfd-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/information-is-not-knowledge-or-is-it.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/d6a700bb-9c4a-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/straight-to-the-server.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/a2829c95-cf56-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/hunt-the-bug.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/1f51e322-8aa3-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/look-ma-no-mouse.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/5e5af3cf-e1bf-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/13a1e9710b53ad5795a971afb304a0cf/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/6d4ed13d-c646-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/4a11a1a1d810967184694662d629de2d/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/2a9b7e55-c701-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/abc6e5a362f8adad812c5cfa87783bd9/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/2b4f8693-caf5-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/d7343c8afb32e9feee0fed1fc2acd378/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/7df8fa59-07c2-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/eb072974e828f87af924bce557b2c614/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/6c2d6703-17f0-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/f284df82c57336019410ed5f68ace295/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/1e88dd42-191c-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/cf9c253dc8ebf2b6aeec619b9ab67da6/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/a9ef6ff9-1918-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/ff7435c6445ef11c311067965832f760/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/8e31e1c3-ebe5-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/89021e789fbd37d54a28b1f242d9153e/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/bb2dda81-13f8-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/bbc2198760a18abd0a8110a605475b95/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/68cb99c8-13fa-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/7877f9a0868dd64f5ccb89861fed8ceb/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/8f4291d2-e7ca-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/372e0f41bced75ab64cfe1cbb76de4d0/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/dec79b41-1a00-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/d240a216701f5c48c58fc3c3cabff42e/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/5f7b8e8e-bd63-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/1e00ed86f091bddcee8b422c806dceff/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/3a52a280-a133-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/8917b28cb5966d2cd835c151ed79e26b/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/0b0e5416-a749-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/cec058aac7395d280dc0298fcca3ccca/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/910f093e-1b6f-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/32da68ec9873b8a5c48b0193bfbcf38b/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/988e60ba-79e7-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/19bee749eaa26dce0829ad89ab2b2678/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/44378124-7dae-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/5f697320187cf69c66114ff7b0c49b90/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/6ca6bc6b-8be3-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/15a6805a2edc268cd592a4030fa31b92/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/24600566-7301-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/7b52e002401857cbb0daeb44dad2b719/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/f8d1c652-79ec-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/cdf6a85ad770099681ddb3f12796c52a/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/c3068122-7317-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/0abcda60891603412bdaf90e82b1c381/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/e109d249-8c06-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/aaa6e40380fd996cef796acc5c4bb5fd/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/3ef213cd-7e8c-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/b65be7e2b0050c8aca3c16e8f3021f98/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/e6fbc59f-8253-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/994fc3f349787510b9d685cc6c5e5f5b/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/76b0fed3-8269-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/bc1ee536bdb42b9e10ff600d3faf30bd/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/71e716bc-b77f-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/6a3d117549299b0d9ab5f69ecd20b17a/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/a42cae58-bc27-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/7e76830b72748ddabf0346690c1afea8/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/a5d3878b-bc32-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/f12c0497208119a2469945d914be24b8/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/a2bb64e5-cf56-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/d557d56029e2604c7739e12b597a3b43/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/def76226-1a00-11f0-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/38f420076471d88c3d5f5d0db423cca1/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/76b8750a-8269-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/2fa45bd0347b7c5005288106cdef469f/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/88fcc579-91b7-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/7043ee16b83b7226b7822e9a46de394c/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/4b2a80b4-c5d3-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/7f81e8837d0540d610c5019478c7647a/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/d6fa743a-ed2f-11ef-864f-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/8644292aaa052ff2971d3541256ee605/logo.png" },
+      { page: "https://academy.hackthebox.com/achievement/badge/2bae35a6-b1af-11f0-9254-bea50ffe6cb4", img: "https://academy.hackthebox.com/storage/badges/f0cb51ce20a27147baa2a52a9dbc176e/logo.png" }
+    ];
+
+    const container = document.getElementById("badgeContainer");
+
+    badges.forEach(badge => {
+      const div = document.createElement("div");
+      div.className = "badge-item";
+
+      const link = document.createElement("a");
+      link.href = badge.page;
+      link.target = "_blank";
+      link.rel = "noopener";
+
+      const img = document.createElement("img");
+      img.src = badge.img;
+
+      const fileName = badge.img.split("/").pop() || "badge";
+      const baseName = fileName.replace(/\.(png|jpg|jpeg)$/i, "");
+      img.alt = "HTB Badge - " + baseName.replace(/[-_]+/g, " ");
+
+      link.appendChild(img);
+      div.appendChild(link);
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
