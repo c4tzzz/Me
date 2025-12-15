@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Radio | c4tz</title>
+<link href="../static/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="page">
+<aside class="sidebar">
+<a class="brand" href="../about.html">
+<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<div><h1>c4tz</h1><p>Portfolio &amp; writeups</p></div>
+</a>
+<nav class="snav">
+<ul>
+<li><a href="../writeup.html">Write Up</a></li>
+<li><a href="../portfolio.html">Portfolio</a></li>
+<li><a href="../skills.html">Skills</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</nav>
+<div class="social">
+<a href="https://tryhackme.com" rel="noopener" target="_blank">
+<img alt="TryHackMe (cat)" src="../static/image/thm.png"/>
+</a>
+<a href="https://zindi.africa/users/c4tz" rel="noopener" target="_blank">
+<img alt="Zindi (cat)" src="../static/image/zindi.png"/>
+</a>
+<a href="https://app.hackthebox.com" rel="noopener" target="_blank">
+<img alt="Hack The Box (cat)" src="../static/image/htb.png"/>
+</a>
+<a href="https://www.root-me.org/c4tz" rel="noopener" target="_blank">
+<img alt="Root-Me (cat)" src="../static/image/rootme.png"/>
+</a>
+<a href="https://github.com/c4tzzz" rel="noopener" target="_blank">
+<img alt="GitHub (cat)" src="../static/image/github.png"/>
+</a>
+</div>
+</aside>
+<div class="content">
+<div class="topbar">
+<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<strong>c4tz</strong>
+</div>
+<main class="main">
+<h2 class="page-title">Radio</h2>
+<section class="prose">
+<p class="meta">Notes rapides HackRF / SDR / BLE</p>
+<p>
+<img alt="HackRF leds" src="../static/image/portfolio/hackrf/image.png" style="max-width:320px;height:auto"/>
+</p>
+<div class="callout">
+<p>Quand tu branches le HackRF One, tu dois avoir <strong>4 LEDs</strong> dont la LED <strong>USB</strong> en <strong>vert</strong> (voir photo).</p>
+</div>
+<div class="grid two">
+<div>
+<p><img alt="Zadig site" src="../static/image/portfolio/hackrf/image%201.png"/></p>
+<pre><code>https://zadig.akeo.ie/</code></pre>
+</div>
+<div>
+<p><img alt="Zadig options" src="../static/image/portfolio/hackrf/image%202.png"/></p>
+<div class="callout">
+<ul>
+<li><strong>Options → List All Devices</strong></li>
+<li>Sélectionne <strong>HackRF One</strong></li>
+<li>Choisis <strong>WinUSB</strong></li>
+<li><strong>Install Driver</strong> / <strong>Replace Driver</strong></li>
+<li>Redémarre SDR# (en admin sous Windows)</li>
+</ul>
+</div>
+</div>
+</div>
+<details open="">
+<summary><strong>Fichiers à télécharger</strong></summary>
+<ul>
+<li><a href="../static/image/portfolio/hackrf/sdrpp_windows_x64.zip">sdrpp_windows_x64.zip</a></li>
+<li><a href="https://github.com/greatscottgadgets/hackrf/releases">hackrf-2024.02.1_(1).zip</a></li>
+</ul>
+</details>
+<h3>SDR++ (réglages rapides)</h3>
+<p><img alt="SDR++ UI" src="../static/image/portfolio/hackrf/image%203.png"/></p>
+<div class="callout">
+<p>
+              Pour un <strong>signal faible</strong>, active le <strong>LNA</strong> (Low Noise Amplifier) pour amplifier
+              sans trop ajouter de bruit.
+            </p>
+</div>
+<p><img alt="LNA" src="../static/image/portfolio/hackrf/image%204.png"/></p>
+<div class="grid two">
+<div><img alt="Réglages 1" src="../static/image/portfolio/hackrf/image%205.png"/></div>
+<div><img alt="Réglages 2" src="../static/image/portfolio/hackrf/image%206.png"/></div>
+</div>
+<p>Joue avec <strong>VGA gain</strong> et <strong>LNA gain</strong> pour obtenir un signal clair et écoutable.</p>
+<div class="callout">
+<p>
+              À côté de Lille (62), liste les stations locales visibles :
+              <a href="https://frequence-radio.org/frequence_par_departement.html" rel="noopener" target="_blank">frequence-radio.org</a>
+              puis choisis ton département.
+            </p>
+</div>
+<div class="callout">
+<p>
+              Prise en main simple (logiciel + SDR). Attention à ne pas passer le HackRF en mode <strong>DFU</strong>.
+              Le binaire <code>hackrf_info</code> (fourni) peut aider en cas de doute.
+            </p>
+</div>
+<h2>URH</h2>
+<p><img alt="URH packets" src="../static/image/portfolio/hackrf/image%207.png"/></p>
+<p>Observation de paquets sur la bande <strong>2.412 GHz</strong>.</p>
+<h2>Wi-Fi 2,4 GHz (avec SDR++)</h2>
+<p><img alt="SDR++ 2.4 GHz" src="../static/image/portfolio/hackrf/image%208.png"/></p>
+<div class="callout">
+<ul>
+<li>Des <strong>pics réguliers</strong> indiquent du Wi-Fi.</li>
+<li>Les plus forts correspondent souvent aux <strong>beacons</strong> des routeurs proches.</li>
+<li>Activité plus dense pendant du streaming / download / navigation.</li>
+</ul>
+<h4>Exemple</h4>
+<ul>
+<li><strong>Barres jaunes</strong> persistantes = émissions stables (Wi-Fi).</li>
+<li>De nombreux <strong>pics blancs</strong> peuvent être des <strong>interférences</strong> (p.ex. micro-ondes).</li>
+</ul>
+<p>On peut aussi balayer en <strong>5 GHz</strong> selon le matériel.</p>
+</div>
+<h2>Satellite (NOAA / WX)</h2>
+<p><a href="https://wxtoimgrestored.xyz/downloads/" rel="noopener" target="_blank">WXtoImg restored – downloads</a></p>
+<p><img alt="WXtoImg" src="../static/image/portfolio/hackrf/image%209.png"/></p>
+<div class="callout">
+<p>
+              Le HackRF ne capte que pendant une <strong>émission</strong> (passage du satellite).
+              Traite ensuite avec <code>dump1090</code> (analyse) et <code>WXtoImg</code> (image météo).
+            </p>
+</div>
+<h2>Bluetooth Low Energy (BLE)</h2>
+<div class="callout">
+<p>
+              BLE = 40 canaux de 2 MHz (2402–2480 MHz). Advertising sur <strong>37 (2402)</strong>,
+              <strong>38 (2426)</strong>, <strong>39 (2480)</strong>.
+            </p>
+<p>Rouge = activité détectée (émissions). Bleu = signaux BLE reçus.</p>
+</div>
+<div class="grid two">
+<div><img alt="Scan BLE 1" src="../static/image/portfolio/hackrf/image%2010.png"/></div>
+<div><img alt="Scan BLE 2" src="../static/image/portfolio/hackrf/image%2011.png"/></div>
+</div>
+<p><img alt="Spectre BLE" src="../static/image/portfolio/hackrf/image%2012.png"/></p>
+<div class="grid two">
+<div>
+<p><a href="../static/image/portfolio/hackrf/mac.py">mac.py</a></p>
+</div>
+<div>
+<div class="callout">
+<ul>
+<li><strong>Lecture</strong> des fichiers <code>capture_channel_37.raw</code>, <code>38.raw</code>, <code>39.raw</code></li>
+<li><strong>Décodage</strong> IQ → bits</li>
+<li><strong>Recherche</strong> de l’<em>Access Address</em> BLE <code>0x8E89BED6</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid two">
+<div>
+<p><a href="../static/image/portfolio/hackrf/scan.py">scan.py</a></p>
+</div>
+<div>
+<div class="callout">
+<ul>
+<li>Capture des canaux 37/38/39</li>
+<li>Spectrogramme par canal</li>
+<li>Sauvegarde des .raw et images</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid two">
+<div>
+<!-- le fichier s'appelle 'scan 1.py' dans ton dossier -->
+<p><a href="../static/image/portfolio/hackrf/scan%201.py">scan 1.py</a></p>
+</div>
+<div>
+<div class="callout">
+<p>
+                  Analyse l’activité BLE à partir de fichiers <code>.raw</code> et détecte l’<em>Access Address</em>.
+                </p>
+</div>
+</div>
+</div>
+<div class="callout" style="border-left:4px solid #c00">
+<p><strong>Attention :</strong> une capture d’1 minute est très lourde et lente.</p>
+<p>Préfère des fenêtres de <strong>10–30 s</strong> selon l’environnement.</p>
+</div>
+</section>
+</main>
+<footer class="footer">© 2025 c4tz — respect cats</footer>
+</div>
+</div>
+<nav aria-label="Navigation mobile" class="mobile-nav">
+<a href="../writeup.html"><span>WriteUp</span></a>
+<a href="../portfolio.html"><span>Portfolio</span></a>
+<a href="../skills.html"><span>Skills</span></a>
+<a href="../about.html"><span>About</span></a>
+</nav>
+<!-- helpers de mise en page simple (si non déjà dans ton CSS) -->
+<style>
+    .prose img{max-width:100%;height:auto;border-radius:8px}
+    .grid.two{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width: 800px){.grid.two{grid-template-columns:1fr}}
+    .callout{padding:1rem;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .meta{opacity:.7;font-size:.9rem;margin-bottom:.5rem}
+    pre{overflow:auto;padding:.75rem;border-radius:8px;background:rgba(127,127,127,.12)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  </style>
+</body>
+</html>
