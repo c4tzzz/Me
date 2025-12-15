@@ -54,7 +54,6 @@
     <main class="main">
       <h2 class="page-title">Contacts</h2>
 
-      <!-- Contact (même style que les cards en bas) -->
       <section class="list">
         <div class="card">
           <h2>Email</h2>
@@ -69,16 +68,8 @@
         <div class="card">
           <h2>Discord</h2>
           <p class="meta">Le plus rapide pour discuter / questions courtes.</p>
-          <p><strong>Pseudo :</strong> <code>TON_DISCORD</code></p>
-          <!-- Optionnel: ajoute un lien d'invite si tu en as un
-          <div class="actions">
-            <a href="https://discord.gg/TON_INVITE" target="_blank" rel="noopener">Serveur / invite</a>
-          </div>
-          -->
-        </div>
-      </section>
+          <p><strong>Pseudo :</strong> <code>c4tz2</code></p>
 
-      <!-- Liens rapides -->
       <section class="list">
         <a class="card" href="https://github.com/c4tzzz" target="_blank" rel="noopener">
           <h2>GitHub</h2><p>Projets, scripts, notes, portfolio.</p>
@@ -110,7 +101,6 @@
 </nav>
 
 <script>
-  // Copier l'email (propre, sans bouton moche)
   const btn = document.getElementById("copyEmailBtn");
   const email = document.getElementById("emailValue").textContent.trim();
 
@@ -120,7 +110,6 @@
       btn.textContent = "Copié";
       setTimeout(() => btn.textContent = "Copier l’adresse", 1200);
     }catch(e){
-      // fallback simple
       prompt("Copie l'adresse :", email);
     }
   });
