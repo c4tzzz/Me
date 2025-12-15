@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Skills | c4tz</title>
+<link href="../static/css/style.css" rel="stylesheet"/>
+<style>
+    /* ====== Certifications grid (uniform sizes + attractive layout) ====== */
+    .certs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .cert-card {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: #0f1420;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .cert-card:focus-visible {
+      outline: 2px solid #67e8f9;
+      outline-offset: 3px;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    }
+    .cert-thumb {
+      aspect-ratio: 16 / 9;            /* <— tailles identiques */
+      overflow: hidden;
+    }
+    .cert-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;                /* recadrage propre et constant */
+      display: block;
+    }
+    .cert-caption {
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-align: center;
+      color: #e6edf3;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* Optionnel : harmonise un peu la section “Compétences” sur petits écrans */
+    @media (max-width: 640px) {
+      .prose ul { padding-left: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+<aside class="sidebar">
+<a class="brand" href="../about.html">
+<img alt="Avatar de c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<div><h1>c4tz</h1><p>Portfolio &amp; writeups</p></div>
+</a>
+<nav aria-label="Navigation latérale" class="snav">
+<ul>
+<li><a href="../writeup.html">Write Up</a></li>
+<li><a href="../portfolio.html">Portfolio</a></li>
+<li><a aria-current="page" href="../skills.html">Skills</a></li>
+<li><a href="../about.html">About</a></li>
+</ul>
+</nav>
+<div class="social">
+<a href="https://tryhackme.com" rel="noopener" target="_blank">
+<img alt="TryHackMe (cat)" src="../static/image/thm.png"/>
+</a>
+<a href="https://zindi.africa/users/c4tz" rel="noopener" target="_blank">
+<img alt="Zindi (cat)" src="../static/image/zindi.png"/>
+</a>
+<a href="https://app.hackthebox.com" rel="noopener" target="_blank">
+<img alt="Hack The Box (cat)" src="../static/image/htb.png"/>
+</a>
+<a href="https://www.root-me.org/c4tz" rel="noopener" target="_blank">
+<img alt="Root-Me (cat)" src="../static/image/rootme.png"/>
+</a>
+<a href="https://github.com/c4tzzz" rel="noopener" target="_blank">
+<img alt="GitHub (cat)" src="../static/image/github.png"/>
+</a>
+</div>
+</aside>
+<div class="content">
+<div class="topbar">
+<img alt="Avatar de c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<strong>c4tz</strong>
+</div>
+<main class="main">
+<h2 class="page-title">Skills</h2>
+<section class="prose">
+<h2>Compétences</h2>
+<ul>
+<li>web</li>
+<li>Blue Team (cdsa)</li>
+<li>Red Team (cbbh)</li>
+<li>Network</li>
+<li>Social Ingeneering</li>
+<li>Artificial Intelligence</li>
+</ul>
+</section>
+<section class="prose">
+<h2>Certifications / Path complétés</h2>
+<div class="certs">
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/390" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="SOC Analyst Path — Hack The Box" decoding="async" loading="lazy" src="../static/image/socanalyst.png"/>
+</div>
+<div class="cert-caption">SOC Analyst (HTB Academy)</div>
+</a>
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/418" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="AI Red Teamer Path — Hack The Box" decoding="async" loading="lazy" src="../static/image/redteamia.png"/>
+</div>
+<div class="cert-caption">AI Red Teamer (HTB Academy)</div>
+</a>
+<a class="cert-card" href="https://academy.hackthebox.com/achievement/1663642/path/419" rel="noopener" target="_blank">
+<div class="cert-thumb">
+<img alt="Junior Cybersecurity Analyst — Hack The Box" decoding="async" loading="lazy" src="../static/image/juniorcybersec.png"/>
+</div>
+<div class="cert-caption">Junior Cybersecurity Analyst (HTB Academy)</div>
+</a>
+</div>
+</section>
+</main>
+<footer class="footer">© 2025 c4tz — respect cats</footer>
+</div>
+</div>
+<nav aria-label="Navigation mobile" class="mobile-nav">
+<a href="../writeup.html"><span>WriteUp</span></a>
+<a href="../portfolio.html"><span>Portfolio</span></a>
+<a aria-current="page" href="../skills.html"><span>Skills</span></a>
+<a href="../about.html"><span>About</span></a>
+</nav>
+</body>
+</html>

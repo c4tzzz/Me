@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>PDF Viewer | c4tz</title>
+<link href="../static/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="page">
+<aside class="sidebar">
+<img alt="" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<nav class="snav"><ul>
+<li><a alt="" href="../writeup.html"> Write Up</a></li>
+<li><a alt="" href="../portfolio.html"> Portfolio</a></li>
+<li><a alt="" href="../skills.html"> Skills</a></li>
+<li><a alt="" href="../about.html"> About</a></li>
+</ul></nav>
+</aside>
+<div class="content">
+<img alt="" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<main class="main">
+<h2 class="page-title">Prévisualisation PDF</h2>
+<div class="viewer"><iframe id="pdf" loading="lazy" style="width:100%;height:80vh;border:0" title="PDF"></iframe></div>
+<p class="prose"><a download="" href="" id="open">Télécharger le PDF</a></p>
+</main>
+<footer class="footer">© 2025 c4tz — respect cats</footer>
+</div>
+</div>
+<nav aria-label="Navigation mobile" class="mobile-nav">
+<a alt="" href="../writeup.html"><span>WriteUp</span></a>
+<a alt="" href="../portfolio.html"><span>Portfolio</span></a>
+<a alt="" href="../skills.html"><span>Skills</span></a>
+<a alt="" href="../about.html"><span>About</span></a>
+</nav>
+<script>
+    const params=new URLSearchParams(location.search); const file=params.get('file')||'static/docs/sample.pdf';
+    document.getElementById('pdf').src=file; document.getElementById('open').href=file;
+  </script>
+</body>
+</html>
