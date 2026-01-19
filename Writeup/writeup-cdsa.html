@@ -21,109 +21,27 @@
 .prose table{background:rgba(255,255,255,.01)}
 .prose th{color:#cfd6e3;font-weight:600}
 </style><style>
-/* ===== Professional readability (presentation-only) ===== */
-
-/* Code blocks */
 .prose pre,
 pre {
-  background: rgba(255,255,255,0.04) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: transparent !important;
+  border: none !important;
   box-shadow: none !important;
-  border-radius: 12px !important;
-  padding: 1rem 1.1rem !important;
-  margin: 1rem 0 !important;
-  overflow-x: auto !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0.75rem 0 !important;
 }
-
+.prose pre code,
+pre code,
+code, kbd, samp {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 .prose pre code,
 pre code {
   display: block;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !important;
-  font-size: 13.5px !important;
-  line-height: 1.65 !important;
-  white-space: pre !important;
-  word-break: normal !important;
-  overflow-wrap: normal !important;
-  tab-size: 4;
-}
-
-/* If a block is explicitly marked as wrapping, wrap cleanly (no token shredding) */
-pre.code-wrap code,
-.prose pre.code-wrap code {
   white-space: pre-wrap !important;
-  overflow-wrap: anywhere !important;
-  word-break: normal !important;
-}
-
-/* Inline code */
-.prose :not(pre) > code,
-.prose kbd,
-.prose samp,
-:not(pre) > code,
-kbd,
-samp {
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.12) !important;
-  box-shadow: none !important;
-  border-radius: 6px !important;
-  padding: 0.12em 0.35em !important;
-}
-
-/* Details blocks */
-.prose details {
-  margin: 0.85rem 0;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  background: rgba(255,255,255,0.02);
-  padding: 0.2rem 0.85rem;
-}
-.prose details[open] {
-  background: rgba(255,255,255,0.03);
-}
-.prose details > summary {
-  cursor: pointer;
-  padding: 0.65rem 0;
-}
-
-/* Tables */
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.01);
-}
-.prose th,
-.prose td {
-  padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  vertical-align: top;
-}
-.prose tr:nth-child(even) td {
-  background: rgba(255,255,255,0.02);
-}
-
-/* Images */
-.prose img {
-  max-width: 100%;
-  height: auto;
-}
-.prose figure.image img {
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-}
-
-/* Links and focus */
-.prose a {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.18em;
-}
-.prose a:focus-visible,
-.prose summary:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-  border-radius: 6px;
+  word-break: break-word !important;
 }
 </style></head>
 <div class="page">
