@@ -29,15 +29,13 @@
 
     <nav class="snav">
       <ul>
-        <li><a alt="" href="writeup.html"> Write Up</a></li>
-        <li><a alt="" href="portfolio.html"> Portfolio</a></li>
+        <li><a href="writeup.html">Write Up</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
         <li><a href="friends.html">Friends</a></li>
-        <li><a alt="" href="contact.html"> Contacts</a></li>
-        <li><a alt="" href="about.html"> About</a></li>
+        <li><a class="active" href="contact.html" aria-current="page">Contacts</a></li>
+        <li><a href="about.html">About</a></li>
       </ul>
     </nav>
-
-    
   </aside>
 
   <div class="content">
@@ -63,23 +61,33 @@
         <div class="card">
           <h2>Discord</h2>
           <p class="meta">Le plus rapide pour discuter / questions courtes.</p>
-          <p><strong>Pseudo :</strong> <code>c4tz2</code></p>
+          <p><strong>Pseudo :</strong> <code id="discordValue">c4tz2</code></p>
+          <div class="actions">
+            <button class="linklike" type="button" id="copyDiscordBtn">Copier le pseudo</button>
+          </div>
+        </div>
+      </section>
 
       <section class="list">
         <a class="card" href="https://github.com/c4tzzz" target="_blank" rel="noopener">
-          <h2>GitHub</h2><p>Projets, scripts, notes, portfolio.</p>
+          <h2>GitHub</h2>
+          <p>Projets, scripts, notes, portfolio.</p>
         </a>
-        <a class="card" href="https://app.hackthebox.com" target="_blank" rel="noopener">
-          <h2>Hack The Box</h2><p>Parcours, labs, achievements.</p>
+        <a class="card" href="https://app.hackthebox.com/public/users/2191182" target="_blank" rel="noopener">
+          <h2>Hack The Box</h2>
+          <p>Parcours, labs, achievements.</p>
         </a>
         <a class="card" href="https://www.root-me.org/c4tz" target="_blank" rel="noopener">
-          <h2>Root-Me</h2><p>Profil &amp; challenges.</p>
+          <h2>Root-Me</h2>
+          <p>Profil &amp; challenges.</p>
         </a>
         <a class="card" href="https://tryhackme.com" target="_blank" rel="noopener">
-          <h2>TryHackMe</h2><p>Profil &amp; rooms.</p>
+          <h2>TryHackMe</h2>
+          <p>Profil &amp; rooms.</p>
         </a>
         <a class="card" href="https://zindi.africa/users/c4tz" target="_blank" rel="noopener">
-          <h2>Zindi</h2><p>Compétitions data / IA.</p>
+          <h2>Zindi</h2>
+          <p>Compétitions data / IA.</p>
         </a>
       </section>
     </main>
@@ -89,26 +97,34 @@
 </div>
 
 <nav aria-label="Navigation mobile" class="mobile-nav">
-  <a alt="" href="writeup.html"><span>WriteUp</span></a>
-  <a alt="" href="portfolio.html"><span>Portfolio</span></a>
-  <a href="friends.html" alt=""><span>Friends</span></a>
-  <a alt="" href="contact.html"><span>Contacts</span></a>
-  <a alt="" href="about.html"><span>About</span></a>
+  <a href="writeup.html"><span>WriteUp</span></a>
+  <a href="portfolio.html"><span>Portfolio</span></a>
+  <a href="friends.html"><span>Friends</span></a>
+  <a class="active" href="contact.html" aria-current="page"><span>Contacts</span></a>
+  <a href="about.html"><span>About</span></a>
 </nav>
 
 <script>
-  const btn = document.getElementById("copyEmailBtn");
-  const email = document.getElementById("emailValue").textContent.trim();
+  function bindCopyButton(buttonId, valueId, defaultLabel) {
+    const button = document.getElementById(buttonId);
+    const value = document.getElementById(valueId)?.textContent?.trim();
+    if (!button || !value) return;
 
-  btn?.addEventListener("click", async () => {
-    try{
-      await navigator.clipboard.writeText(email);
-      btn.textContent = "Copié";
-      setTimeout(() => btn.textContent = "Copier l’adresse", 1200);
-    }catch(e){
-      prompt("Copie l'adresse :", email);
-    }
-  });
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(value);
+        button.textContent = "Copié";
+        setTimeout(() => {
+          button.textContent = defaultLabel;
+        }, 1200);
+      } catch (error) {
+        prompt("Copie cette valeur :", value);
+      }
+    });
+  }
+
+  bindCopyButton("copyEmailBtn", "emailValue", "Copier l’adresse");
+  bindCopyButton("copyDiscordBtn", "discordValue", "Copier le pseudo");
 </script>
 </body>
 </html>
