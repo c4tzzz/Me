@@ -4,20 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
   <title>Contacts | c4tz</title>
-  <link href="static/css/style.css" rel="stylesheet"/>
-
-  <!-- Mini CSS juste pour aligner les liens/actions, sans changer ton thème -->
-  <style>
-    .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
-    .linklike{
-      background:none;border:0;padding:0;
-      color:inherit;text-decoration:underline;cursor:pointer;
-      font:inherit;
-    }
-    .meta{opacity:.85}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
-  </style>
-</head>
+  <link href="static/css/style.css" rel="stylesheet"/></head>
 
 <body>
 <div class="page">
@@ -126,5 +113,6 @@
   bindCopyButton("copyEmailBtn", "emailValue", "Copier l’adresse");
   bindCopyButton("copyDiscordBtn", "discordValue", "Copier le pseudo");
 </script>
+  <script src="/static/js/page-transition.js" defer></script>
 </body>
 </html>

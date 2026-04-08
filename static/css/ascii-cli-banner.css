@@ -1,0 +1,78 @@
+.ascii-cli-banner {
+  --ascii-banner-size: min(42vw, 400px);
+  --ascii-banner-color: #d8dce6;
+  --ascii-banner-opacity: 0.96;
+  --ascii-banner-glow-blur: 10px;
+  --ascii-banner-glow-alpha: 0.12;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: var(--ascii-banner-size);
+  max-width: 100%;
+  margin-inline: auto;
+  background: transparent !important;
+  color: var(--ascii-banner-color);
+  opacity: var(--ascii-banner-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+.ascii-cli-banner pre {
+  margin: 0 auto;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: inherit;
+  font: 700 12px/1.03 "Geist Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  white-space: pre;
+  text-align: left;
+  width: max-content;
+  max-width: 100%;
+  text-shadow:
+    0 0 var(--ascii-banner-glow-blur) rgba(255, 170, 92, var(--ascii-banner-glow-alpha)),
+    0 0 calc(var(--ascii-banner-glow-blur) * 2.2) rgba(255, 108, 38, calc(var(--ascii-banner-glow-alpha) * 0.42));
+  animation: none;
+}
+
+.ascii-cli-banner .ascii-cli-banner-fallback {
+  display: block;
+}
+
+.ascii-cli-banner .ascii-cli-banner-pre {
+  display: none;
+}
+
+.ascii-cli-banner.ascii-ready .ascii-cli-banner-fallback {
+  display: none;
+}
+
+.ascii-cli-banner.ascii-ready .ascii-cli-banner-pre {
+  display: block;
+}
+
+@keyframes asciiBannerFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes asciiBannerFlicker {
+  0% { filter: brightness(0.97); }
+  45% { filter: brightness(1.03); }
+  100% { filter: brightness(0.99); }
+}
+
+@media (max-width: 820px) {
+  .ascii-cli-banner pre {
+    font-size: 9.2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ascii-cli-banner pre {
+    animation: none;
+  }
+}

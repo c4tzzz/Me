@@ -19,15 +19,14 @@
     </div>
   </div>
   <nav class="mobile-nav" aria-label="Navigation mobile">
-    <a href="writeup.html"  alt=""><span>WriteUp</span></a>
-    <a href="portfolio.html"  alt=""><span>Portfolio</span></a>
-    <a href="friends.html" alt=""><span>Friends</span></a>
-    <a href="contact.html"  alt=""><span>Contacts</span></a>
-    <a href="about.html"  alt=""><span>About</span></a>
+    <a href="/writeup.html" alt=""><span>WU</span></a>
+    <a href="/portfolio.html" alt=""><span>post</span></a>
+    <a href="/about.html" alt=""><span>abouts</span></a>
   </nav>
   <script>
     const params=new URLSearchParams(location.search); const file=params.get('file')||'static/docs/sample.pdf';
     document.getElementById('pdf').src=file; document.getElementById('open').href=file;
   </script>
+  <script src="/static/js/page-transition.js" defer></script>
 </body>
 </html>

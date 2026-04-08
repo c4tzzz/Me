@@ -6,44 +6,8 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>(CJCA) | c4tz</title>
 <link href="../static/css/style.css" rel="stylesheet"/>
-<style>
-/* Polished typography */
-.prose{max-width:1000px}
-.prose p{font-size:15.5px;line-height:1.8}
-.prose h1,.prose h2,.prose h3{font-weight:700;letter-spacing:.2px}
-.prose h1{font-size:30px}
-.prose h2{font-size:22px;margin-top:22px}
-.prose h3{font-size:18px;margin-top:18px}
-.prose li{margin:6px 0}
-/* code blocks more readable */
-.prose pre{font-size:13.5px;line-height:1.6;word-wrap:break-word;white-space:pre-wrap}
-/* soft tables */
-.prose table{background:rgba(255,255,255,.01)}
-.prose th{color:#cfd6e3;font-weight:600}
-</style><style>
-.prose pre,
-pre {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0.75rem 0 !important;
-}
-.prose pre code,
-pre code,
-code, kbd, samp {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-.prose pre code,
-pre code {
-  display: block;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-}
-</style></head>
+</head>
+<body class="writeup-detail-page">
 <div class="page">
 <aside class="sidebar">
 <a class="brand" href="../about.html">
@@ -52,10 +16,9 @@ pre code {
 </a>
 <nav class="snav">
 <ul>
-<li><a alt="" href="../writeup.html"> Write Up</a></li>
-<li><a alt="" href="../portfolio.html"> Portfolio</a></li>
-<li><a alt="" href="../contact.html"> Contacts</a></li>
-<li><a alt="" href="../about.html"> About</a></li>
+<li><a href="/about.html">abouts</a></li>
+<li><a href="/portfolio.html">post</a></li>
+<li><a class="active" aria-current="page" href="/writeup.html">WU</a></li>
 </ul>
 </nav>
 </aside>
@@ -8518,10 +8481,9 @@ AND source.ip:192.168.28.130
 </div>
 </div>
 <nav aria-label="Navigation mobile" class="mobile-nav">
-<a href="../writeup.html"><span>WriteUp</span></a>
-<a href="../portfolio.html"><span>Portfolio</span></a>
-<a href="../skills.html"><span>Skills</span></a>
-<a href="../about.html"><span>About</span></a>
+<a href="/about.html"><span>abouts</span></a>
+<a href="/portfolio.html"><span>post</span></a>
+<a class="active" aria-current="page" href="/writeup.html"><span>WU</span></a>
 </nav>
 <script>
 (function(){
@@ -8585,4 +8547,6 @@ AND source.ip:192.168.28.130
     }
   });
 })();</script>
+  <script src="/static/js/page-transition.js" defer></script>
+</body>
 </html>

@@ -16,13 +16,12 @@
     </a>
 
     <nav class="snav">
-      <ul>
-        <li><a href="../writeup.html">Write Up</a></li>
-        <li><a href="../portfolio.html">Portfolio</a></li>
-        <li><a href="../contact.html">Contacts</a></li>
-        <li><a href="../about.html">About</a></li>
-      </ul>
-    </nav>
+<ul>
+<li><a href="/about.html">abouts</a></li>
+<li><a class="active" aria-current="page" href="/portfolio.html">post</a></li>
+<li><a href="/writeup.html">WU</a></li>
+</ul>
+</nav>
   </aside>
 
   <div class="content">
@@ -335,23 +334,11 @@ powershell -ExecutionPolicy Bypass -File .\run_wordlists_leakcheck.ps1 `
 </div>
 
 <nav aria-label="Navigation mobile" class="mobile-nav">
-  <a href="../writeup.html"><span>WriteUp</span></a>
-  <a href="../portfolio.html"><span>Portfolio</span></a>
-  <a href="../skills.html"><span>Skills</span></a>
-  <a href="../about.html"><span>About</span></a>
+<a href="/about.html"><span>abouts</span></a>
+<a class="active" aria-current="page" href="/portfolio.html"><span>post</span></a>
+<a href="/writeup.html"><span>WU</span></a>
 </nav>
-
-<!-- helpers de mise en page simple (si non déjà dans ton CSS) -->
-<style>
-  .prose img{max-width:100%;height:auto;border-radius:8px}
-  .grid.two{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
-  @media (max-width: 800px){.grid.two{grid-template-columns:1fr}}
-  .callout{padding:1rem;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
-  .meta{opacity:.7;font-size:.9rem;margin-bottom:.5rem}
-  pre{overflow:auto;padding:.75rem;border-radius:8px;background:rgba(127,127,127,.12)}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-</style>
-
+  <script src="/static/js/page-transition.js" defer></script>
 </body>
 </html>
 

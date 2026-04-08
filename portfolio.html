@@ -7,66 +7,6 @@
 
   <!-- CSS global du site -->
   <link href="static/css/style.css" rel="stylesheet"/>
-
-  <style>
-    /* ===== Portfolio grid ===== */
-    .projects{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-      gap:28px;
-      padding:10px 0;
-    }
-
-    /* ===== Card ===== */
-    .project-card{
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      background:linear-gradient(145deg,#0d1117,#0b0e14);
-      border-radius:18px;
-      overflow:hidden;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow:0 8px 25px rgba(0,0,0,.35);
-      transition:transform .25s ease, box-shadow .25s ease, border .25s ease;
-    }
-    .project-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 16px 40px rgba(0,0,0,.55);
-      border:1px solid rgba(102,243,255,.22);
-    }
-
-    /* ===== Thumbnail ===== */
-    .project-thumb{
-      width:100%;
-      aspect-ratio:16/9;
-      overflow:hidden;
-      background:#161b22;
-    }
-    .project-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:transform .3s ease, opacity .3s ease;
-    }
-    .project-card:hover .project-thumb img{
-      transform:scale(1.04);
-      opacity:.92;
-    }
-
-    /* ===== Caption ===== */
-    .project-caption{
-      padding:14px 16px;
-      text-align:center;
-      font-size:1.05rem;
-      font-weight:600;
-      color:#e6edf3;
-      border-top:1px solid rgba(255,255,255,.08);
-      background:rgba(13,17,23,.65);
-      backdrop-filter:blur(4px);
-      letter-spacing:.3px;
-    }
-  </style>
 </head>
 
 <body>
@@ -74,18 +14,17 @@
 
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar">
-      <a class="brand" href="about.html">
+      <a class="brand" href="../">
         <img alt="" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
         <div><h1>c4tz</h1><p>Portfolio &amp; writeups</p></div>
       </a>
 
       <nav class="snav">
         <ul>
-          <li><a href="writeup.html">Write Up</a></li>
-          <li><a aria-current="page" href="portfolio.html">Portfolio</a></li>
-          <li><a href="friends.html">Friends</a></li>
-          <li><a href="contact.html">Contacts</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="../">../</a></li>
+          <li><a href="/writeup.html">WU</a></li>
+          <li><a aria-current="page" href="/portfolio.html">post</a></li>
+          <li><a href="/about.html">abouts</a></li>
         </ul>
       </nav>
     </aside>
@@ -101,8 +40,7 @@
         <h2 class="page-title">Portfolio</h2>
 
         <section class="prose">
-          <h2>Mes projets</h2>
-          <p>Une sélection de projets personnels en IA, radio, cybersécurité et networking.</p>
+          <h2>Mes projects</h2>
         </section>
 
         <!-- ===== PORTFOLIO CARDS ===== -->
@@ -119,7 +57,7 @@
             <div class="project-thumb">
               <img alt="AI GoodWords project" src="static/image/portfolio/aigoodworks/goodwords.png"/>
             </div>
-            <div class="project-caption">GoodWords – IA Adversarial Linguistics</div>
+            <div class="project-caption">GoodWords – AI Adversarial Linguistics</div>
           </a>
 
           <a class="project-card" href="portfolio/compromissionia.html">
@@ -127,7 +65,7 @@
               <!-- ✅ chemin conforme à ton repo (voir screenshot) -->
               <img alt="IA compromission project" src="static/image/portfolio/IAcompromi/compromissed.png"/>
             </div>
-            <div class="project-caption">IA Compromission</div>
+            <div class="project-caption">AI Compromission</div>
           </a>
 
         </section>
@@ -139,11 +77,10 @@
 
   <!-- ===== MOBILE NAV ===== -->
   <nav class="mobile-nav">
-    <a href="writeup.html"><span>WriteUp</span></a>
-    <a aria-current="page" href="portfolio.html"><span>Portfolio</span></a>
-    <a href="friends.html" alt=""><span>Friends</span></a>
-    <a href="skills.html"><span>Skills</span></a>
-    <a href="about.html"><span>About</span></a>
+    <a href="/writeup.html"><span>WU</span></a>
+    <a aria-current="page" href="/portfolio.html"><span>post</span></a>
+    <a href="/about.html"><span>abouts</span></a>
   </nav>
+  <script src="/static/js/page-transition.js" defer></script>
 </body>
 </html>
