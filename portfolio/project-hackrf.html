@@ -1,136 +1,323 @@
 <!DOCTYPE html>
-
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>Radio | c4tz</title>
+<title>HackRF and SDR Experiments | c4tz</title>
 <link href="../static/css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="page">
 <aside class="sidebar">
 <a class="brand" href="../about.html">
-<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<img alt="c4tz avatar" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
 <div><h1>c4tz</h1><p>projects, research &amp; writeups</p></div>
 </a>
 <nav class="snav">
 <ul>
-<li><a href="/about.html">abouts</a></li>
-<li><a class="active" aria-current="page" href="/portfolio.html">project</a></li>
+<li><a href="/about.html">about</a></li>
+<li><a class="active" aria-current="page" href="/portfolio.html">projects</a></li>
 <li><a href="/research.html">research</a></li>
-<li><a href="/writeup.html">writeup</a></li>
+<li><a href="/writeup.html">writeups</a></li>
 </ul>
 </nav>
-
 </aside>
+
 <div class="content">
 <div class="topbar">
-<img alt="avatar c4tz" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
+<img alt="c4tz avatar" class="avatar" src="https://m.media-amazon.com/images/I/511PnEDrRfL._AC_.jpg"/>
 <strong>c4tz</strong>
 </div>
+
 <main class="main">
-<h2 class="page-title">Radio</h2>
+<h2 class="page-title">HackRF and SDR Experiments</h2>
 <section class="prose">
-<p class="meta">Notes rapides HackRF / SDR / BLE</p>
+<p class="meta">HackRF One • SDR++ • URH • Wi-Fi spectrum observation • NOAA weather satellites • Bluetooth Low Energy</p>
+
 <p>
-<img alt="HackRF leds" src="../static/image/portfolio/hackrf/image.png" style="max-width:320px;height:auto"/>
+  This project documents a practical introduction to software-defined radio (SDR) with a HackRF One.
+  The objective is to understand the complete signal path: hardware setup, spectrum observation,
+  IQ recording, signal processing, and protocol-oriented analysis.
 </p>
+
 <div class="callout">
-<p>Quand tu branches le HackRF One, tu dois avoir <strong>4 LEDs</strong> dont la LED <strong>USB</strong> en <strong>vert</strong> (voir photo).</p>
+<p><strong>Project scope</strong></p>
+<ul>
+<li>Verify the HackRF installation and Windows USB driver.</li>
+<li>Visualize RF activity with an FFT spectrum and waterfall display.</li>
+<li>Record and inspect complex IQ samples.</li>
+<li>Explore Wi-Fi activity, weather-satellite signals, and BLE advertising channels.</li>
+<li>Build small Python tools for repeatable capture and analysis.</li>
+</ul>
 </div>
+
+<div class="callout" style="border-left:4px solid #c00">
+<p><strong>Responsible-use note</strong></p>
+<p>
+  Use the equipment only on signals and frequencies that you are authorized to observe.
+  This page focuses on passive measurement, spectrum visualization, and analysis of test captures.
+  Do not intercept, decode, replay, or interfere with private communications or protected services.
+</p>
+</div>
+
+<h2>1. SDR fundamentals</h2>
+
+<p>
+  A software-defined radio moves part of the radio chain into software. The antenna receives an RF signal;
+  the HackRF tunes to a center frequency, digitizes the signal, and sends complex samples to the computer.
+  The software then displays or processes those samples.
+</p>
+
+<div class="grid two">
+<div class="callout">
+<h4>Typical signal chain</h4>
+<ol>
+<li>Antenna and RF front end</li>
+<li>Frequency tuning</li>
+<li>Analog filtering and gain</li>
+<li>ADC conversion</li>
+<li>Complex I/Q sample stream</li>
+<li>FFT, waterfall, demodulation, or protocol analysis</li>
+</ol>
+</div>
+<div class="callout">
+<h4>Key parameters</h4>
+<ul>
+<li><strong>Center frequency:</strong> the frequency around which the receiver is tuned.</li>
+<li><strong>Sample rate:</strong> the number of I/Q samples captured per second.</li>
+<li><strong>Bandwidth:</strong> the frequency span represented by the capture.</li>
+<li><strong>Gain:</strong> amplification applied before or during processing.</li>
+<li><strong>Noise floor:</strong> the background energy visible when no dominant signal is present.</li>
+</ul>
+</div>
+</div>
+
+<p>
+  I/Q means <em>in-phase</em> and <em>quadrature</em>. Instead of storing only signal amplitude,
+  the receiver stores two synchronized streams that preserve amplitude and phase information.
+  This makes it possible to shift, filter, demodulate, and analyze a signal after recording it.
+</p>
+
+<div class="callout">
+<p><strong>Practical rule:</strong> choose a sample rate wide enough to contain the signal of interest,
+but avoid unnecessarily wide captures. A wider rate increases CPU usage, storage requirements, and the amount
+of unrelated RF activity in the recording.</p>
+</div>
+
+<h2>2. Hardware and driver setup</h2>
+
+<p>
+  When connecting the HackRF One, verify that the device powers correctly and that the USB status LED is active.
+  The exact LED configuration can vary with firmware and hardware state, but the USB connection should be stable
+  before launching an SDR application.
+</p>
+
+<p>
+<img alt="HackRF status LEDs" src="../static/image/portfolio/hackrf/image.png" style="max-width:320px;height:auto"/>
+</p>
+
+<div class="callout">
+<p>
+  If the device is recognized correctly, the USB LED should be <strong>green</strong> as shown in the photograph.
+  If the device is not detected, check the USB cable, avoid unpowered hubs, and verify the driver before changing
+  SDR application settings.
+</p>
+</div>
+
+<h3>Install the WinUSB driver with Zadig</h3>
+
 <div class="grid two">
 <div>
-<p><img alt="Zadig site" src="../static/image/portfolio/hackrf/image%201.png"/></p>
+<p><img alt="Zadig website" src="../static/image/portfolio/hackrf/image%201.png"/></p>
 <pre><code>https://zadig.akeo.ie/</code></pre>
 </div>
 <div>
-<p><img alt="Zadig options" src="../static/image/portfolio/hackrf/image%202.png"/></p>
+<p><img alt="Zadig device options" src="../static/image/portfolio/hackrf/image%202.png"/></p>
 <div class="callout">
-<ul>
-<li><strong>Options → List All Devices</strong></li>
-<li>Sélectionne <strong>HackRF One</strong></li>
-<li>Choisis <strong>WinUSB</strong></li>
-<li><strong>Install Driver</strong> / <strong>Replace Driver</strong></li>
-<li>Redémarre SDR# (en admin sous Windows)</li>
-</ul>
+<ol>
+<li>Select <strong>Options → List All Devices</strong>.</li>
+<li>Choose <strong>HackRF One</strong>.</li>
+<li>Select the <strong>WinUSB</strong> driver.</li>
+<li>Click <strong>Install Driver</strong> or <strong>Replace Driver</strong>.</li>
+<li>Restart SDR++ with administrator privileges if Windows still reports an access problem.</li>
+</ol>
 </div>
 </div>
 </div>
+
+<p>
+  The driver must be installed for the correct device. Selecting a different USB device in Zadig can make that
+  device unavailable to its normal Windows driver, so check the displayed device name before applying changes.
+</p>
+
 <details open="">
-<summary><strong>Fichiers à télécharger</strong></summary>
+<summary><strong>Files and software</strong></summary>
 <ul>
-<li><a href="../static/image/portfolio/hackrf/sdrpp_windows_x64.zip">sdrpp_windows_x64.zip</a></li>
-<li><a href="https://github.com/greatscottgadgets/hackrf/releases">hackrf-2024.02.1_(1).zip</a></li>
+<li><a href="../static/image/portfolio/hackrf/sdrpp_windows_x64.zip">sdrpp_windows_x64.zip</a> — SDR++ for Windows</li>
+<li><a href="https://github.com/greatscottgadgets/hackrf/releases">HackRF releases</a> — official utilities and firmware packages</li>
 </ul>
 </details>
-<h3>SDR++ (réglages rapides)</h3>
-<p><img alt="SDR++ UI" src="../static/image/portfolio/hackrf/image%203.png"/></p>
+
+<h2>3. SDR++: spectrum inspection and gain control</h2>
+
+<p><img alt="SDR++ user interface" src="../static/image/portfolio/hackrf/image%203.png"/></p>
+
+<p>
+  SDR++ provides the main observation interface: a spectrum view, a waterfall, tuning controls,
+  demodulation options, and hardware gain controls. The spectrum shows signal energy by frequency;
+  the waterfall shows how that energy changes over time.
+</p>
+
+<h3>Understanding the waterfall</h3>
+<ul>
+<li>A horizontal axis represents frequency around the tuned center frequency.</li>
+<li>A vertical axis represents time.</li>
+<li>Color intensity represents received power or relative signal strength.</li>
+<li>Persistent lines usually indicate continuous or regularly repeated transmissions.</li>
+<li>Short bursts appear as brief traces and may correspond to packet-based protocols.</li>
+</ul>
+
 <div class="callout">
 <p>
-              Pour un <strong>signal faible</strong>, active le <strong>LNA</strong> (Low Noise Amplifier) pour amplifier
-              sans trop ajouter de bruit.
-            </p>
+  For a <strong>weak signal</strong>, increase the <strong>LNA</strong> (Low Noise Amplifier) carefully.
+  More gain can improve visibility, but excessive gain raises the noise floor and may overload the receiver.
+  Stop increasing gain when the signal becomes readable or when the noise floor begins to dominate.
+</p>
 </div>
-<p><img alt="LNA" src="../static/image/portfolio/hackrf/image%204.png"/></p>
+
+<p><img alt="LNA gain control" src="../static/image/portfolio/hackrf/image%204.png"/></p>
+
 <div class="grid two">
-<div><img alt="Réglages 1" src="../static/image/portfolio/hackrf/image%205.png"/></div>
-<div><img alt="Réglages 2" src="../static/image/portfolio/hackrf/image%206.png"/></div>
+<div><img alt="SDR++ settings 1" src="../static/image/portfolio/hackrf/image%205.png"/></div>
+<div><img alt="SDR++ settings 2" src="../static/image/portfolio/hackrf/image%206.png"/></div>
 </div>
-<p>Joue avec <strong>VGA gain</strong> et <strong>LNA gain</strong> pour obtenir un signal clair et écoutable.</p>
+
+<p>
+  Adjust <strong>LNA gain</strong> and <strong>VGA gain</strong> incrementally rather than setting both to maximum.
+  A useful workflow is to begin with low gain, observe the noise floor, increase one control at a time,
+  and compare the result with the antenna disconnected or terminated where appropriate.
+</p>
+
+<div class="callout">
+<p><strong>Gain troubleshooting</strong></p>
+<ul>
+<li><strong>Flat or weak display:</strong> verify the antenna, frequency, sample rate, and device connection.</li>
+<li><strong>Overloaded display:</strong> reduce gain; strong nearby transmitters can mask weaker signals.</li>
+<li><strong>Many unexplained peaks:</strong> move away from USB noise, displays, switching power supplies, and computers.</li>
+<li><strong>Unstable waterfall:</strong> reduce CPU load, narrow the bandwidth, or check the USB connection.</li>
+</ul>
+</div>
+
+<p>
+  For local radio references near Lille and elsewhere in France, consult a frequency directory such as
+  <a href="https://frequence-radio.org/frequence_par_departement.html" rel="noopener" target="_blank">frequence-radio.org</a>
+  and select the relevant department. Treat directory data as a starting point, then confirm activity directly
+  in the spectrum display.
+</p>
+
 <div class="callout">
 <p>
-              À côté de Lille (62), liste les stations locales visibles :
-              <a href="https://frequence-radio.org/frequence_par_departement.html" rel="noopener" target="_blank">frequence-radio.org</a>
-              puis choisis ton département.
-            </p>
+  This is a straightforward software-and-SDR workflow. Avoid switching the HackRF into <strong>DFU</strong>
+  mode unless a firmware-recovery or update procedure specifically requires it. The supplied
+  <code>hackrf_info</code> utility can help confirm device detection and firmware information.
+</p>
 </div>
-<div class="callout">
+
+<h2>4. URH and packet-oriented analysis</h2>
+
+<p><img alt="URH packet analysis interface" src="../static/image/portfolio/hackrf/image%207.png"/></p>
+
 <p>
-              Prise en main simple (logiciel + SDR). Attention à ne pas passer le HackRF en mode <strong>DFU</strong>.
-              Le binaire <code>hackrf_info</code> (fourni) peut aider en cas de doute.
-            </p>
-</div>
-<h2>URH</h2>
-<p><img alt="URH packets" src="../static/image/portfolio/hackrf/image%207.png"/></p>
-<p>Observation de paquets sur la bande <strong>2.412 GHz</strong>.</p>
-<h2>Wi-Fi 2,4 GHz (avec SDR++)</h2>
-<p><img alt="SDR++ 2.4 GHz" src="../static/image/portfolio/hackrf/image%208.png"/></p>
+  Universal Radio Hacker (URH) can be used to inspect recorded signals at the packet level.
+  The workflow is generally: record a short IQ sample, identify repeated bursts, estimate modulation and timing,
+  demodulate the signal, and inspect the resulting bitstream.
+</p>
+
+<p>
+  The example capture focuses on the <strong>2.412 GHz</strong> region. The purpose is observation and protocol
+  analysis of authorized test data, not transmission or replay.
+</p>
+
+<h2>5. 2.4 GHz Wi-Fi spectrum observation</h2>
+
+<p><img alt="SDR++ 2.4 GHz spectrum" src="../static/image/portfolio/hackrf/image%208.png"/></p>
+
 <div class="callout">
 <ul>
-<li>Des <strong>pics réguliers</strong> indiquent du Wi-Fi.</li>
-<li>Les plus forts correspondent souvent aux <strong>beacons</strong> des routeurs proches.</li>
-<li>Activité plus dense pendant du streaming / download / navigation.</li>
+<li><strong>Regular peaks</strong> can indicate recurring Wi-Fi activity.</li>
+<li>Persistent, relatively strong bursts may correspond to access-point <strong>beacons</strong>.</li>
+<li>Denser activity is common during streaming, downloads, or active browsing.</li>
+<li>In the 2.4 GHz band, overlapping channel activity can make the waterfall appear wider than a single network.</li>
 </ul>
-<h4>Exemple</h4>
+<h4>Example interpretation</h4>
 <ul>
-<li><strong>Barres jaunes</strong> persistantes = émissions stables (Wi-Fi).</li>
-<li>De nombreux <strong>pics blancs</strong> peuvent être des <strong>interférences</strong> (p.ex. micro-ondes).</li>
+<li>Persistent <strong>yellow traces</strong> indicate stable emissions.</li>
+<li>Numerous <strong>white peaks</strong> may indicate short-lived interference, including non-Wi-Fi sources.</li>
 </ul>
-<p>On peut aussi balayer en <strong>5 GHz</strong> selon le matériel.</p>
 </div>
-<h2>Satellite (NOAA / WX)</h2>
-<p><a href="https://wxtoimgrestored.xyz/downloads/" rel="noopener" target="_blank">WXtoImg restored – downloads</a></p>
-<p><img alt="WXtoImg" src="../static/image/portfolio/hackrf/image%209.png"/></p>
+
+<p>
+  The same approach can be applied to the <strong>5 GHz</strong> range when the hardware, antenna, and software
+  configuration support it. Spectrum observation alone does not identify a network or reveal its contents;
+  it only shows RF energy and its time/frequency behavior.
+</p>
+
+<h2>6. Weather satellites: NOAA and WX</h2>
+
+<p><a href="https://wxtoimgrestored.xyz/downloads/" rel="noopener" target="_blank">WXtoImg restored — downloads</a></p>
+<p><img alt="WXtoImg weather image" src="../static/image/portfolio/hackrf/image%209.png"/></p>
+
+<p>
+  Weather-satellite reception is time-dependent: the receiver must be configured before the satellite pass,
+  and the antenna must have a sufficiently clear view of the sky. NOAA APT experiments are commonly performed
+  around the 137 MHz region, subject to the satellite, local conditions, and applicable regulations.
+</p>
+
+<div class="callout">
+<p><strong>Typical processing chain</strong></p>
+<ol>
+<li>Determine the pass time and expected downlink frequency.</li>
+<li>Tune SDR++ before the pass begins.</li>
+<li>Record a clean baseband or audio signal during the pass.</li>
+<li>Demodulate and inspect the recording.</li>
+<li>Process the result with <code>WXtoImg</code> or another compatible decoder.</li>
+</ol>
+<p>
+  A HackRF only receives useful data while the satellite is transmitting and within reception range.
+  Signal quality depends on antenna placement, local noise, horizon obstructions, Doppler shift,
+  and the duration of the pass.
+</p>
+</div>
+
+<h2>7. Bluetooth Low Energy (BLE)</h2>
+
 <div class="callout">
 <p>
-              Le HackRF ne capte que pendant une <strong>émission</strong> (passage du satellite).
-              Traite ensuite avec <code>dump1090</code> (analyse) et <code>WXtoImg</code> (image météo).
-            </p>
-</div>
-<h2>Bluetooth Low Energy (BLE)</h2>
-<div class="callout">
+  BLE uses 40 channels with 2 MHz spacing across the 2.4 GHz ISM band, from 2402 to 2480 MHz.
+  Advertising packets use three dedicated channels:
+  <strong>channel 37 at 2402 MHz</strong>, <strong>channel 38 at 2426 MHz</strong>,
+  and <strong>channel 39 at 2480 MHz</strong>.
+</p>
 <p>
-              BLE = 40 canaux de 2 MHz (2402–2480 MHz). Advertising sur <strong>37 (2402)</strong>,
-              <strong>38 (2426)</strong>, <strong>39 (2480)</strong>.
-            </p>
-<p>Rouge = activité détectée (émissions). Bleu = signaux BLE reçus.</p>
+  In the visualization, red indicates detected activity and blue indicates received BLE-related signals.
+  These colors are display conventions; they do not by themselves prove that a complete packet was decoded.
+</p>
 </div>
+
 <div class="grid two">
-<div><img alt="Scan BLE 1" src="../static/image/portfolio/hackrf/image%2010.png"/></div>
-<div><img alt="Scan BLE 2" src="../static/image/portfolio/hackrf/image%2011.png"/></div>
+<div><img alt="BLE scan on advertising channel 37" src="../static/image/portfolio/hackrf/image%2010.png"/></div>
+<div><img alt="BLE scan on advertising channels" src="../static/image/portfolio/hackrf/image%2011.png"/></div>
 </div>
-<p><img alt="Spectre BLE" src="../static/image/portfolio/hackrf/image%2012.png"/></p>
+
+<p><img alt="BLE spectrum" src="../static/image/portfolio/hackrf/image%2012.png"/></p>
+
+<h3>BLE analysis pipeline</h3>
+<p>
+  A raw capture is not yet a decoded BLE packet. A basic analysis pipeline must account for frequency offset,
+  filtering, demodulation, symbol timing, bit ordering, whitening, and packet validation. The BLE advertising
+  Access Address <code>0x8E89BED6</code> is a useful synchronization marker when searching for advertising packets.
+</p>
+
 <div class="grid two">
 <div>
 <p><a href="../static/image/portfolio/hackrf/mac.py">mac.py</a></p>
@@ -138,13 +325,14 @@
 <div>
 <div class="callout">
 <ul>
-<li><strong>Lecture</strong> des fichiers <code>capture_channel_37.raw</code>, <code>38.raw</code>, <code>39.raw</code></li>
-<li><strong>Décodage</strong> IQ → bits</li>
-<li><strong>Recherche</strong> de l’<em>Access Address</em> BLE <code>0x8E89BED6</code></li>
+<li><strong>Reads</strong> <code>capture_channel_37.raw</code>, <code>38.raw</code>, and <code>39.raw</code>.</li>
+<li><strong>Converts</strong> IQ samples into a signal representation and candidate bits.</li>
+<li><strong>Searches</strong> for the BLE advertising Access Address <code>0x8E89BED6</code>.</li>
 </ul>
 </div>
 </div>
 </div>
+
 <div class="grid two">
 <div>
 <p><a href="../static/image/portfolio/hackrf/scan.py">scan.py</a></p>
@@ -152,40 +340,97 @@
 <div>
 <div class="callout">
 <ul>
-<li>Capture des canaux 37/38/39</li>
-<li>Spectrogramme par canal</li>
-<li>Sauvegarde des .raw et images</li>
+<li>Captures advertising channels 37, 38, and 39.</li>
+<li>Generates a per-channel spectrogram.</li>
+<li>Saves raw captures and diagnostic images.</li>
 </ul>
 </div>
 </div>
 </div>
+
 <div class="grid two">
 <div>
-<!-- le fichier s'appelle 'scan 1.py' dans ton dossier -->
 <p><a href="../static/image/portfolio/hackrf/scan%201.py">scan 1.py</a></p>
 </div>
 <div>
 <div class="callout">
 <p>
-                  Analyse l’activité BLE à partir de fichiers <code>.raw</code> et détecte l’<em>Access Address</em>.
-                </p>
+  Analyzes BLE activity from <code>.raw</code> files and searches for the advertising Access Address.
+</p>
 </div>
 </div>
 </div>
+
+<h3>What a decoder still needs to verify</h3>
+<ul>
+<li>Correct center frequency and sample-rate assumptions.</li>
+<li>Stable symbol timing and a valid GFSK demodulation step.</li>
+<li>Correct BLE bit order and whitening configuration.</li>
+<li>Packet length, CRC, and channel consistency.</li>
+<li>Reproducibility across multiple captures rather than a single apparent match.</li>
+</ul>
+
 <div class="callout" style="border-left:4px solid #c00">
-<p><strong>Attention :</strong> une capture d’1 minute est très lourde et lente.</p>
-<p>Préfère des fenêtres de <strong>10–30 s</strong> selon l’environnement.</p>
+<p><strong>Capture size warning:</strong> a one-minute recording can be very large and slow to process.</p>
+<p>
+  With interleaved 8-bit I/Q data, storage can reach roughly 2 bytes per sample.
+  At 20 MS/s, that is approximately 40 MB/s, or about 2.4 GB for one minute,
+  before considering metadata or additional processing files.
+</p>
+<p>Prefer short windows of <strong>10–30 seconds</strong> during development and increase the duration only when necessary.</p>
 </div>
+
+<h2>8. Reproducible capture methodology</h2>
+
+<p>
+  A useful SDR experiment should be repeatable. Record the configuration alongside every capture so that a
+  spectrum or decoder result can be reproduced later.
+</p>
+
+<div class="callout">
+<p><strong>Recommended capture metadata</strong></p>
+<ul>
+<li>Capture date and local time</li>
+<li>Center frequency</li>
+<li>Sample rate and requested bandwidth</li>
+<li>LNA, VGA, and any other gain values</li>
+<li>Antenna type and approximate location</li>
+<li>Capture duration and file format</li>
+<li>Software version and hardware firmware version</li>
+<li>Relevant environmental conditions or nearby sources of interference</li>
+</ul>
+</div>
+
+<p>
+  Use short test captures first, validate the signal path, and only then launch a longer recording.
+  This saves storage, makes debugging faster, and reduces the risk of drawing conclusions from an overloaded
+  or incorrectly tuned receiver.
+</p>
+
+<h2>9. Practical conclusions</h2>
+
+<div class="callout">
+<ul>
+<li>The HackRF provides a flexible platform for observing and recording a broad range of RF activity.</li>
+<li>Good results depend as much on antenna placement, gain control, and bandwidth selection as on the software.</li>
+<li>A visible peak is evidence of RF energy, not automatically evidence of a decoded protocol.</li>
+<li>Reliable protocol analysis requires synchronization, demodulation, validation, and repeated testing.</li>
+<li>Short, well-documented captures are more useful than large, undocumented recordings.</li>
+</ul>
+</div>
+
 </section>
 </main>
 <footer class="footer">© 2025 c4tz — respect cats</footer>
 </div>
 </div>
-<nav aria-label="Navigation mobile" class="mobile-nav">
-<a href="/about.html"><span>abouts</span></a>
-<a class="active" aria-current="page" href="/portfolio.html"><span>project</span></a>
+
+<nav aria-label="Mobile navigation" class="mobile-nav">
+<a href="/about.html"><span>about</span></a>
+<a class="active" aria-current="page" href="/portfolio.html"><span>projects</span></a>
 <a href="/research.html"><span>research</span></a>
-<a href="/writeup.html"><span>writeup</span></a>
-</nav>  <script src="/static/js/page-transition.js" defer></script>
+<a href="/writeup.html"><span>writeups</span></a>
+</nav>
+<script src="/static/js/page-transition.js" defer></script>
 </body>
 </html>
