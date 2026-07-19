@@ -1,7 +1,12 @@
 (function () {
   const params = new URLSearchParams(window.location.search);
   const slugFromQuery = params.get("slug");
-  const normalizedSlug = (slugFromQuery || window.location.pathname.split("/").pop().replace(/\.html$/i, "")).trim();
+  const normalizedPathSlug = window.location.pathname
+    .split("/")
+    .pop()
+    .replace(/\.html$/i, "")
+    .replace(/\.md$/i, "");
+  const normalizedSlug = (slugFromQuery || normalizedPathSlug).trim();
 
   const headerEl = document.getElementById("report-title");
   const sourceEl = document.getElementById("report-source");
@@ -85,12 +90,15 @@
 
   const loadMarkdown = async (postSlug) => {
     const encodedSlug = encodeURIComponent(postSlug);
+    const pageDir = new URL(".", window.location.href).pathname;
     const candidates = [
       `/research/${encodedSlug}.md`,
-      `${window.location.pathname.replace(/\\/[^/]*$/i, `/${encodedSlug}.md`)}`,
+      `${pageDir.replace(/([^/])$/, "$1/")}${encodedSlug}.md`,
     ];
 
-    for (const candidate of candidates) {
+    const uniqueCandidates = [...new Set(candidates)];
+
+    for (const candidate of uniqueCandidates) {
       const response = await fetch(candidate);
       if (response.ok) {
         return response.text();

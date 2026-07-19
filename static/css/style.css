@@ -278,7 +278,7 @@ body.writeup-detail-page .prose pre code {
   transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease;
 }
 
-.prose a:hover {
+.prose a:hover:not(.card):not(.project-card):not(.cert-card):not(.badge-item) {
   color: var(--accent-strong);
   border-bottom-color: rgba(255, 210, 154, 0.4);
   text-shadow: 0 0 10px rgba(255, 210, 154, 0.2);
@@ -290,6 +290,7 @@ body.writeup-detail-page .prose pre code {
 .prose .project-card {
   text-decoration: none;
   border-bottom: 0 solid transparent;
+  position: relative;
 }
 
 .prose .card:hover,
@@ -300,7 +301,9 @@ body.writeup-detail-page .prose pre code {
 .prose .cert-card:focus-visible,
 .prose .badge-item:focus-visible,
 .prose .project-card:focus-visible {
-  border-bottom-color: transparent;
+  border-bottom-color: transparent !important;
+  text-decoration: none;
+  text-shadow: none;
 }
 
 .prose pre,
@@ -462,12 +465,14 @@ pre code {
   position: absolute;
   left: 0;
   bottom: -2px;
-  width: 0;
+  width: 100%;
   height: 1px;
   background: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
+  box-shadow: 0 0 12px rgba(255, 210, 154, 0.5), 0 0 18px rgba(255, 210, 154, 0.35);
+  transform: scaleX(0);
+  transform-origin: left center;
   opacity: 0;
-  transition: width 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .card:hover h2,
@@ -477,7 +482,7 @@ pre code {
 
 .card:hover h2::after,
 .card:focus-visible h2::after {
-  width: 100%;
+  transform: scaleX(1);
   opacity: 0.95;
 }
 
@@ -492,12 +497,14 @@ pre code {
   position: absolute;
   left: 0;
   bottom: -2px;
-  width: 0;
+  width: 100%;
   height: 1px;
   background: var(--accent);
-  box-shadow: 0 0 6px var(--accent);
+  box-shadow: 0 0 12px rgba(255, 210, 154, 0.5), 0 0 18px rgba(255, 210, 154, 0.35);
+  transform: scaleX(0);
+  transform-origin: left center;
   opacity: 0;
-  transition: width 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .project-card:hover .project-caption,
@@ -507,7 +514,7 @@ pre code {
 
 .project-card:hover .project-caption::after,
 .project-card:focus-visible .project-caption::after {
-  width: 100%;
+  transform: scaleX(1);
   opacity: 0.95;
 }
 
