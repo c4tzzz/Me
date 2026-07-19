@@ -1,0 +1,15 @@
+{
+  "cve": [
+    {
+      "type": "CVE",
+      "published": "2026-04-23",
+      "status": "Corrected",
+      "id": "CVE-2026-42456",
+      "slug": "cve-2026-42456",
+      "title": "CVE-2026-42456",
+      "source": "https://github.com/Mintplex-Labs/anything-llm/security/advisories/GHSA-jwqg-jfg3-x5vv",
+      "path": "/research/view.html?slug=cve-2026-42456"
+    }
+  ],
+  "draft": []
+}
