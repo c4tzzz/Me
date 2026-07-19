@@ -84,11 +84,20 @@
   };
 
   const loadMarkdown = async (postSlug) => {
-    const response = await fetch(`/research/${encodeURIComponent(postSlug)}.md`);
-    if (!response.ok) {
-      throw new Error("Report not found");
+    const encodedSlug = encodeURIComponent(postSlug);
+    const candidates = [
+      `/research/${encodedSlug}.md`,
+      `${window.location.pathname.replace(/\\/[^/]*$/i, `/${encodedSlug}.md`)}`,
+    ];
+
+    for (const candidate of candidates) {
+      const response = await fetch(candidate);
+      if (response.ok) {
+        return response.text();
+      }
     }
-    return response.text();
+
+    throw new Error("Report not found");
   };
 
   const applyRelativeAssetRewrite = (container, postSlug) => {
