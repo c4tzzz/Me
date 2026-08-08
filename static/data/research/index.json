@@ -16,7 +16,7 @@
       "status": "Corrected",
       "id": "CVE-2026-7663",
       "slug": "cve-2026-7663",
-      "title": "CVE-2026-7663 — Langflow Streamable MCP authorization bypass",
+      "title": "CVE-2026-7663 ",
       "source": "https://www.ibm.com/support/pages/node/7277570",
       "path": "/research/view.html?slug=cve-2026-7663"
     }
